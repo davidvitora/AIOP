@@ -1,20 +1,12 @@
 package br.com.aiop.rest.projeto;
-import br.com.aiop.persistencia.entidades.Event;
-import br.com.aiop.persistencia.jdbc.EventDAO;
 import br.com.aiop.session.AIOPSession;
 import br.com.aiop.util.LoginCred;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
-import java.util.List;
-import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Path("/session")
 public class RESTSession{

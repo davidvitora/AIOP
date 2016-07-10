@@ -1,26 +1,7 @@
 <%@page import="javax.ejb.EJB"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="br.com.aiop.session.AIOPSession"%>
-<%!
 
-@EJB
-AIOPSession aiopSession;
-
-public void jspInit() {
-
-    if (aiopSession == null){
-
-        try {
-            aiopSession = (AIOPSession) new InitialContext().lookup("java:module/AIOPSession");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-}
-
-%>
-<% if(aiopSession.isLoged() == false){ response.sendRedirect("/index.jsp");
-    }else{%>
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
     <head>
@@ -65,4 +46,4 @@ public void jspInit() {
         </div>
     </body>
 </html>
-<% } %>
+

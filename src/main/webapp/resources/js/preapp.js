@@ -10,7 +10,7 @@ myApp.controller('loginController', ["$scope", "$timeout", "$http", function($sc
        '/app/session/login'
        ,{"login": $scope.login, "password" : $scope.password})
        .success(function(data){
-           window.location.href = "/Faces/Welcome.jsp";
+           //window.location.href = "/Faces/Welcome.jsp";
        })
        .error(function(data){
            $scope.response = data;

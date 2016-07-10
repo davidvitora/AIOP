@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-class ConexaoFactory {
+public class ConexaoFactory {
     
     public static Connection getConnection() throws ClassNotFoundException{
      String  host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
