@@ -10,7 +10,7 @@ myApp.controller('loginController', ["$scope", "$timeout", "$http", function($sc
        '/app/session/login'
        ,{"login": $scope.login, "password" : $scope.password})
        .success(function(data){
-           window.location.href = "/aiop/Faces/Welcome.jsp";
+           window.location.href = "/Faces/Welcome.jsp";
        })
        .error(function(data){
            $scope.response = data;
@@ -54,7 +54,7 @@ myApp.controller('welcomeController', ["$scope", "$timeout", "$http", function($
     $scope.acessarProjeto = function(projeto){
        $http.post('/app/projetos/acessar', projeto)
        .success(function(data){
-           window.location.href = "/aiop/Faces/Painel/Master.jsp";
+           window.location.href = "/Faces/Painel/Master.jsp";
        })
        .error(function(data){
            $scope.courierModal = data;
@@ -76,7 +76,7 @@ myApp.controller('welcomeController', ["$scope", "$timeout", "$http", function($
         $http.post('/app/session/logOff')
         .success(function(data){
             $scope.response = data;
-            window.location.href = "/aiop/index.jsp";
+            window.location.href = "/index.jsp";
         })
         .error(function(data){
 

@@ -81,7 +81,7 @@ myApp.controller('mainController', ["$scope", "$timeout", "$http", function($sco
     });
     $scope.acessarConfiguracoes = function(data){
      $http.get('/Faces/Welcome.jsp').success( function(data){
-         window.location.href = "/aiop/Faces/Welcome.jsp";
+         window.location.href = "/Faces/Welcome.jsp";
      }).error( function(data){
          console.log(data);
      });
