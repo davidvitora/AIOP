@@ -19,19 +19,19 @@ public void jspInit() {
 }
 
 %>
-<% if(aiopSession.isLoged() == false){ response.sendRedirect("/aiop/index.jsp");
+<% if(aiopSession.isLoged() == false){ response.sendRedirect("/index.jsp");
     }else{%>
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
     <head>
         <title>AIOP</title>
         <meta charset="utf-8">
-        <link href="/aiop/resources/css/bootstrap.min.css" rel="stylesheet">
-        <link id="Style" href="/aiop/resources/css/firstStyle.css" rel="stylesheet">
+        <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+        <link id="Style" href="/resources/css/firstStyle.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-        <script src="/aiop/resources/js/angular.js"></script>
+        <script src="/resources/js/angular.js"></script>
         <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
-        <script src="/aiop/resources/js/preapp.js"></script>
+        <script src="/resources/js/preapp.js"></script>
     </head>
     <body>
         <div class="container-fluid" ng-controller="preController">
@@ -55,9 +55,9 @@ public void jspInit() {
                     <div class="row" ng-repeat="projeto in meusProjetos">
                         <div class="col-md-3 col-md-push-2">
                             <div class="tituloProjeto" ng-click="acessarProjeto(projeto)" >
-                                    <img src="/aiop/resources/images/icones/projeto.png" class="img-circle img-responsive center-block"/>
+                                    <img src="/resources/images/icones/projeto.png" class="img-circle img-responsive center-block"/>
                                     <h3  class="tituloProjeto">{{ projeto.name }}</h3>
-                                    <img src="/aiop/resources/images/icones/iconeNovoProjetoLinha.png" class="center-block"/>
+                                    <img src="/resources/images/icones/iconeNovoProjetoLinha.png" class="center-block"/>
                             </div>
                         </div>
                     </div>

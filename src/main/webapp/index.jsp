@@ -19,24 +19,24 @@ public void jspInit() {
 }
 
 %>
-<% if(aiopSession.isLoged()){ response.sendRedirect("/aiop/Faces/Welcome.jsp");
+<% if(aiopSession.isLoged()){ response.sendRedirect("/Faces/Welcome.jsp");
     }else{%>
     
 <html ng-app="myApp">
 <head>
     <title>AIOP</title>
     <meta charset="utf-8">
-    <link href="/aiop/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link id="Style" href="/aiop/resources/css/firstStyle.css" rel="stylesheet"> 
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link id="Style" href="/resources/css/firstStyle.css" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="/aiop/resources/js/bootstrap.min.js"></script>
-    <script src="/aiop/resources/js/angular.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/angular.js"></script>
     <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
-    <script src="/aiop/resources/js/preapp.js"></script>
+    <script src="/resources/js/preapp.js"></script>
 </head>
 <body>
     <div class="Logindiv" ng-controller="preController" >
-        <img class="img-responsive center-block" src="/aiop/resources/images/Logo.png" />
+        <img class="img-responsive center-block" src="/resources/images/Logo.png" />
         <form>
             <input id="login" type="text" ng-model="login" class="formulario-login form-control" placeholder="Login">
             <input id="senha" type="text" ng-model="password" class=" formulario-login form-control" placeholder="Password">
