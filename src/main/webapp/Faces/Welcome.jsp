@@ -1,7 +1,26 @@
 <%@page import="javax.ejb.EJB"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="br.com.aiop.session.AIOPSession"%>
+<%!
 
+@EJB
+AIOPSession aiopSession;
+
+public void jspInit() {
+
+    if (aiopSession == null){
+
+        try {
+            aiopSession = (AIOPSession) new InitialContext().lookup("java:module/AIOPSession");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+
+%>
+<% if(aiopSession.isLoged() == false){ response.sendRedirect("/index.jsp");
+    }else{%>
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
     <head>
@@ -22,8 +41,7 @@
                     {{ courierModal.message }}
                     </div>
                 </div>
-                <div style="text-align: center; "class="row">
-                    <%= aiopSession.getUser().getName() %>
+                <div style="text-align: center;" class="row">
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -46,4 +64,4 @@
         </div>
     </body>
 </html>
-
+<% } %>
