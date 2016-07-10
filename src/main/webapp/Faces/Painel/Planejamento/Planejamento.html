@@ -1,0 +1,49 @@
+<div id="novoEvento" style=" display: none;" class="modalPlanejamentoAdd">
+    <div class="NovoEvento">
+        <button type="button" class="close"  ng-click="novoEventoClose()" >×</button>
+        <input type="text" class="itemFormulario form-control" ng-model="titleNewEvent" placeholder="Titulo" />
+        <input type="text" class="itemFormulario form-control" ng-model="descriptionNewEvent" placeholder="Descricao" />
+        <input type="text" class="itemFormulario form-control" ng-model="dateNewEvent" placeholder="Data do evento"/>
+        <label>Stats:</label>
+        <select class="itemFormulario" ng-model="statsNewEvent">
+            <option value="Pendente">Pendente</option>
+            <option value="A Definir">A Definir</option>
+            <option value="Cancelado">Cancelado</option>
+            <option value="Concluido">Concluido</option>
+        </select>
+        <button class="btn btn-default"  ng-click="novoEventoCadastrar()">Cadastrar Evento</button>
+    </div>
+</div>
+<div id="mudarData" style=" display: none;" class="modalPlanejamentoAdd">
+    <div class="NovoEvento">
+        <button type="button" class="close"  ng-click="modifyDataEventoClose()" >×</button>
+        <input type="text" class="itemFormulario form-control" ng-model="dateNewEvent" placeholder="Informe a nova data para o item"/>
+        <button class="btn btn-default"  ng-click="modifyDataEventoAtualizar()">Atualizar Data</button>
+    </div>
+</div>
+<div class="itens">
+    <div class="itemPlanejamento"  ng-repeat="item in planejamento">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ item.title }}</div>
+            <div class="panel-body">
+                <div>
+                    <label class="pull-left">Descrição: </label>
+                    <p class="text-justify pull-left">
+                    {{ item.description }}
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p> Data: {{ item.data }} </p>
+                        <button class="btn btn-xs"  ng-click="modifyDataEventoOpen(item)">Modificar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+<button class="btn btn-default" ng-click="novoEventoOpen()">Novo Evento</button>
+		

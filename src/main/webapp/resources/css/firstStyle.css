@@ -1,0 +1,72 @@
+body{
+    background-color: rgb(43,43,43);
+    color: white;
+    text-align: center;
+}
+
+
+
+button.botao{
+    margin-right: 20px;
+    padding: 4px;
+    border: 1px;
+}
+
+div#projetos{
+    margin-top: 200px;
+}
+
+h3.tituloProjeto{
+    text-align: center;
+}
+
+h3.tituloProjeto:hover{
+    color: #f7f7f7;
+    padding-top: 20px;
+}
+
+div.tituloProjeto:hover{
+    cursor: pointer;
+    
+}
+
+
+div.modalPadrao{
+    z-index: 1;
+    color: black;
+    background-color: white;
+    border: 1px solid #222;
+    position: fixed;
+    width: 400px;
+    height: 200px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    right: 500px;
+    bottom: 250px;
+    
+}
+
+/* tela de login */
+
+input.formulario-login{
+    margin-bottom: 5px;
+}
+
+div.Logindiv{
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+button.btn-txt{
+    background: none;
+    border: none;
+    color: #FF5500;
+}
+
+footer{
+    margin-top: 0px;
+    color: white;
+}
