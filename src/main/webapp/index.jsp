@@ -35,7 +35,7 @@ public void jspInit() {
     <script src="/resources/js/preapp.js"></script>
 </head>
 <body>
-    <div class="Logindiv" ng-controller="preController" >
+    <div class="Logindiv" ng-controller="loginController" >
         <img class="img-responsive center-block" src="/resources/images/Logo.png" />
         <form>
             <input id="login" type="text" ng-model="login" class="formulario-login form-control" placeholder="Login">

@@ -34,7 +34,7 @@ public void jspInit() {
         <script src="/resources/js/preapp.js"></script>
     </head>
     <body>
-        <div class="container-fluid" ng-controller="preController">
+        <div class="container-fluid" ng-controller="welcomeController">
                 <div id="modalMensagem" class="modalPadrao" style="display: none;">
                     <div>
                     <button type="button" class="close"  ng-click="modalMensagemClose()">×</button>

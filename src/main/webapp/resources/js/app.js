@@ -57,30 +57,30 @@ myApp.controller('mainController', ["$scope", "$timeout", "$http", function($sco
     $scope.timeline;
     
     //Pre inicialização, obtidos os dados do projeto;
-    $http.get('/aiop/app/projetos/acessar').success( function(data){
+    $http.get('/app/projetos/acessar').success( function(data){
        $scope.projeto = data;
     }).error( function(data){
         $scope.courierModal = data;
     });
     
     //Pega dados dos membros
-    $http.get('/aiop/getMembros').success( function(data){
+    $http.get('/getMembros').success( function(data){
        $scope.membros = data;
     }).error( function(data){
         console.log(data);
     });
-    $http.get('/aiop/getPlanejamento').success( function(data){
+    $http.get('/getPlanejamento').success( function(data){
        $scope.planejamento = data;
     }).error( function(data){
         console.log(data);
     });
-    $http.get('/aiop/getTimeline').success( function(data){
+    $http.get('/getTimeline').success( function(data){
        $scope.timeline= data;
     }).error( function(data){
         console.log(data);
     });
     $scope.acessarConfiguracoes = function(data){
-     $http.get('/aiop/Faces/Welcome.jsp').success( function(data){
+     $http.get('/Faces/Welcome.jsp').success( function(data){
          window.location.href = "/aiop/Faces/Welcome.jsp";
      }).error( function(data){
          console.log(data);
@@ -99,19 +99,19 @@ myApp.controller('mainController', ["$scope", "$timeout", "$http", function($sco
      $("#novoEvento").hide();
    };
    $scope.novoEventoCadastrar = function(){
-        $http.post("/aiop/setPlanejamento", { title : $scope.titleNewEvent , 
+        $http.post("/setPlanejamento", { title : $scope.titleNewEvent , 
             description : $scope.descriptionNewEvent , 
             date : $scope.dateNewEvent, 
             stats :  $scope.statsNewEvent})
         .success(function(result){
-            $http.get('/aiop/getPlanejamento')
+            $http.get('/getPlanejamento')
                     .success( function(data){
                 $scope.planejamento = data;
             }).error( function(data){
                 console.log(data);
             });
             $("#novoEvento").hide();
-            $http.get('/aiop/getTimeline').success( function(data){
+            $http.get('/getTimeline').success( function(data){
                 $scope.timeline= data;
             }).error( function(data){
                 console.log(data);
@@ -130,7 +130,7 @@ myApp.controller('mainController', ["$scope", "$timeout", "$http", function($sco
       $("#mudarData").hide();
     };
     $scope.modifyDataEventoAtualizar = function(){
-        $http.post("/aiop/setEventoNovaData", { oldObject : $scope.item , 
+        $http.post("/setEventoNovaData", { oldObject : $scope.item , 
             newDate : $scope.dateNewEvent})
         .success(function(result){
             $http.get('/aiop/getPlanejamento')
@@ -140,7 +140,7 @@ myApp.controller('mainController', ["$scope", "$timeout", "$http", function($sco
                 console.log(data);
             });
             $("#novoEvento").hide();
-            $http.get('/aiop/getTimeline').success( function(data){
+            $http.get('/getTimeline').success( function(data){
                 $scope.timeline= data;
             }).error( function(data){
                 console.log(data);
