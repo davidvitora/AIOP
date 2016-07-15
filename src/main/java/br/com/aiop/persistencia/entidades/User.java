@@ -1,6 +1,7 @@
 package br.com.aiop.persistencia.entidades;
 
-import java.text.DateFormat;
+import java.util.Date;
+import javax.ws.rs.core.GenericEntity;
 
 public class User {
     private int id;
@@ -9,8 +10,8 @@ public class User {
     private String password;
     private String email;
     private String contact;
-    private DateFormat birthDay;
-    private DateFormat created;
+    private Date birthDay;
+    private Date created;
     
 
     public User(){
@@ -64,19 +65,19 @@ public class User {
         this.contact = contact;
     }
 
-    public DateFormat getBirthDay() {
+    public Date getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(DateFormat birthDay) {
+    public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }
 
-    public DateFormat getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(DateFormat created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
     

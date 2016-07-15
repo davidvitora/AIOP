@@ -5,6 +5,9 @@
  */
 package br.com.aiop.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author David .V
@@ -12,6 +15,7 @@ package br.com.aiop.util;
 public class Courier {
     private int code;
     private String message;
+    private List<String> messages = new ArrayList();
     
     public Courier(){
         this.code = 0;
@@ -32,6 +36,18 @@ public class Courier {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public List<String> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<String> messages) {
+        this.messages = messages;
+    }
+    
+    public void insertMessages(String message){
+        this.messages.add(message);
     }
     
 }

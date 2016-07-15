@@ -7,6 +7,7 @@ body{
 
 
 button.botao{
+    margin-top: 10px;
     margin-right: 20px;
     padding: 4px;
     border: 1px;
@@ -69,4 +70,8 @@ button.btn-txt{
 footer{
     margin-top: 0px;
     color: white;
+}
+
+div#Validacao{
+    display: none;
 }

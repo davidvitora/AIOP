@@ -3,6 +3,7 @@ import br.com.aiop.session.AIOPSession;
 import br.com.aiop.util.LoginCred;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +19,7 @@ public class RESTSession{
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response TryLogin(LoginCred credentials) throws URISyntaxException, ClassNotFoundException, SQLException{
+    public Response TryLogin(LoginCred credentials) throws URISyntaxException, ClassNotFoundException, SQLException, ParseException{
         if(aiopSession.isLoged()){
             return Response.status(400).entity("Usuário já logado").build();
         }else if(aiopSession.Login(credentials.getLogin(), credentials.getPassword())){

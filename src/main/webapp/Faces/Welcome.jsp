@@ -29,11 +29,19 @@ public void jspInit() {
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
         <link id="Style" href="/resources/css/firstStyle.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+        <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+        <script src="/resources/js/jquery-ui.js"></script>
         <script src="/resources/js/angular.js"></script>
         <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
         <script src="/resources/js/preapp.js"></script>
     </head>
     <body>
+        <div id="criar-projeto" title="Criar Projeto">
+            <label> Digite os dados do projeto a ser criado: </label>
+            <input type="text" ng-model="_nomeProjeto" class="formulario-login form-control" placeholder="Nome do projeto" >
+            <input type="password" ng-model="_descricaoProjeto" class=" formulario-login form-control" placeholder="Descrição do projeto" >
+            <button class="btn btn-primary">Criar</button>
+        </div>
         <div class="container-fluid" ng-controller="welcomeController">
                 <div id="modalMensagem" class="modalPadrao" style="display: none;">
                     <div>
@@ -42,6 +50,7 @@ public void jspInit() {
                     </div>
                 </div>
                 <div style="text-align: center;" class="row">
+                    <%=aiopSession.getUser().getName()%>
                 </div>
                 <div class="row">
                     <div class="col-md-12">

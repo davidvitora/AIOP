@@ -29,13 +29,17 @@ public void jspInit() {
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link id="Style" href="/resources/css/firstStyle.css" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+    <script src="/resources/js/jquery-ui.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/angular.js"></script>
     <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+    
     <script src="/resources/js/preapp.js"></script>
+
 </head>
-<body>
-    <div class="Logindiv" ng-controller="loginController" >
+<body ng-controller="loginController">
+    <div class="Logindiv"  >
         <img class="img-responsive center-block" src="/resources/images/Logo.png" />
         <form>
             <input id="login" type="text" ng-model="login" class="formulario-login form-control" placeholder="Login">
@@ -63,19 +67,19 @@ public void jspInit() {
                     <input type="text" ng-model="_login" class="formulario-login form-control" placeholder="Login de usuário" >
                     <input type="password" ng-model="_password" class=" formulario-login form-control" placeholder="Senha" >
                     <input type="text" ng-model="_name" class="formulario-login form-control" placeholder="Nome" >
-                    <input type="text" ng-model="_birthDay" class="formulario-login form-control" placeholder="Data de nascimento" >
+                    <input id="datepicker" type="text" ng-model="_birthDay" class="formulario-login form-control" placeholder="Data de nascimento" >
                     <input type="text" ng-model="_email" class="formulario-login form-control" placeholder="E-mail" >
                     <input type="text" ng-model="_contact" class="formulario-login form-control" placeholder="Contato" >
                 </form>
-                <div class="alert alert-danger" ng-repeat="retorno in retornosCadastroUsuario">
+                <div id="Validacao" class="alert alert-danger" >
                     <div>
-                        <div role="alert"></div>
+                        <div role="alert" ng-repeat="retorno in retornos.messages"><p>{{ retorno }}</p></div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary" >Criar conta</button>
+              <button type="button" class="btn btn-primary" ng-click="cadastrarUsuario()" >Criar conta</button>
             </div>
           </div>
         </div>

@@ -5,13 +5,16 @@ import br.com.aiop.persistencia.entidades.User;
 import br.com.aiop.persistencia.jdbc.ProjectDAO;
 import br.com.aiop.persistencia.jdbc.UserDAO;
 import br.com.aiop.util.Courier;
+import br.com.aiop.util.DateRest;
 import java.sql.SQLException;
+import java.text.ParseException;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Singleton;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
+import javax.ws.rs.core.GenericEntity;
 
 @Stateless
 public class AIOPSession {
@@ -35,7 +38,7 @@ public class AIOPSession {
     }
     
     //Realiza o login e retorna verdadeiro caso bem sucedido
-    public boolean Login(String login, String password) throws ClassNotFoundException, SQLException{
+    public boolean Login(String login, String password) throws ClassNotFoundException, SQLException, ParseException{
         UserDAO dao = new UserDAO();
         user = dao.tryLogin(login, password);
         return user != null;
