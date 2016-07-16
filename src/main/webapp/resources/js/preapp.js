@@ -105,9 +105,11 @@ myApp.controller('welcomeController', ["$scope", "$timeout", "$http", function($
         });
     };
     
+    $scope.user;
     
        $http.get('/app/usuario')
        .success(function(data){
+           $scope.user = data;
        })
        .error(function(data){
        });

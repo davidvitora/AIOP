@@ -50,7 +50,7 @@ public void jspInit() {
                     </div>
                 </div>
                 <div style="text-align: center;" class="row">
-                    <%=aiopSession.getUser().getName()%>
+                    {{ user.name }}
                 </div>
                 <div class="row">
                     <div class="col-md-12">
