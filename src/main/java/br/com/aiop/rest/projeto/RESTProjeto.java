@@ -4,6 +4,7 @@ import br.com.aiop.persistencia.entidades.Project;
 import br.com.aiop.persistencia.jdbc.ProjectDAO;
 import br.com.aiop.session.AIOPSession;
 import br.com.aiop.util.Courier;
+import br.com.aiop.util.Validate;
 import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -61,6 +62,28 @@ public class RESTProjeto {
             return Response.status(Response.Status.OK).entity(courier).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).entity(courier).build();
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveProject(Project project) throws ClassNotFoundException, SQLException{
+        project.setIdOwner(aiopSession.getUser().getId());
+        Courier courier;
+        ProjectDAO dao = new ProjectDAO();
+        courier = Validate.validateProject(project, dao);
+        if(courier  == null){
+            courier = new Courier();
+            if(dao.saveProjeto(project)){
+                courier.setCode(200);
+                courier.setMessage("Created");
+                return Response.status(Response.Status.CREATED).entity(courier).build();
+            }
+            courier.setCode(400);
+            courier.setMessage("Erro ao criar Projeto");
+            return Response.status(Response.Status.EXPECTATION_FAILED).entity(courier).build();
+        }
+        return Response.status(Response.Status.NOT_ACCEPTABLE).entity(courier).build();
     }
     
 }

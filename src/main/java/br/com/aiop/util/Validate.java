@@ -5,7 +5,9 @@
  */
 package br.com.aiop.util;
 
+import br.com.aiop.persistencia.entidades.Project;
 import br.com.aiop.persistencia.entidades.User;
+import br.com.aiop.persistencia.jdbc.ProjectDAO;
 import br.com.aiop.persistencia.jdbc.UserDAO;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,7 +64,7 @@ public class Validate {
         if(user.getBirthDay().after(cal.getTime())){
             courier.insertMessages("Insirá uma data valida");
         }
-
+        
         //Validar contato
         if(user.getContact().matches("^[0-9]+$") == false){
             courier.insertMessages("O contato deverá ter apenas números");
@@ -73,6 +75,33 @@ public class Validate {
         }
         
         //Retornará o courier se a lista de mensagens com pelo menos um item
+        if(courier.getMessages().isEmpty() == false){
+            return courier;
+        }
+        
+        return null;
+    }
+    
+    public static Courier validateProject(Project project, ProjectDAO dao){
+        Courier courier = new Courier();
+        
+        //Validando o nome
+        if(dao.isAvaliable(project.getName()) == false){
+            courier.insertMessages("O nome do projeto já está sendo utilizado");
+        }else if( project.getName().length() < 5 ){
+            courier.insertMessages("O nome do projeto deverá ter no minimo 6 caracteres");
+        }
+        else if(project.getName().length() > 16){
+            courier.insertMessages("O nome do projeto deverá ter no maximo 10 caracteres");
+        }else if(project.getName().matches("^[a-zA-Z0-9]+$") == false){
+            courier.insertMessages("O nome do projeto não deverá ter caracteres especiais");
+        }
+        
+        //Validando a descrição
+        if(project.getDescription().length() > 1000){
+            courier.insertMessages("A descrição do projeto deverá ter no maximo 10 caracteres");
+        }
+        
         if(courier.getMessages().isEmpty() == false){
             return courier;
         }

@@ -36,40 +36,54 @@ public void jspInit() {
         <script src="/resources/js/preapp.js"></script>
     </head>
     <body>
-        <div id="criar-projeto" title="Criar Projeto">
-            <label> Digite os dados do projeto a ser criado: </label>
-            <input type="text" ng-model="_nomeProjeto" class="formulario-login form-control" placeholder="Nome do projeto" >
-            <input type="password" ng-model="_descricaoProjeto" class=" formulario-login form-control" placeholder="Descrição do projeto" >
-            <button class="btn btn-primary">Criar</button>
-        </div>
-        <div class="container-fluid" ng-controller="welcomeController">
-                <div id="modalMensagem" class="modalPadrao" style="display: none;">
+        <img id="Loading"  alt="Loading" src="/resources/gif/load.gif" />
+        <div id="controller" style="display: none;" ng-controller="welcomeController">
+            <div id="criar-projeto" class="ui-dialog" style="display: none">
+                <label> Digite os dados do projeto a ser criado: </label>
+                <input type="text" ng-model="_name" class="formulario-login form-control" placeholder="Nome do projeto" >
+                <input type="text" ng-model="_description" class=" formulario-login form-control" placeholder="Descrição do projeto" >
+                <button id="btn_criar_projeto_criar" class="btn btn-default">Criar</button>
+                <div id="Validacao" class="alert alert-danger" >
                     <div>
-                    <button type="button" class="close"  ng-click="modalMensagemClose()">×</button>
-                    {{ courierModal.message }}
+                        <div role="alert" ng-repeat="valida in validacao.messages"><p>{{ valida }}</p></div>
                     </div>
                 </div>
-                <div style="text-align: center;" class="row">
-                    {{ user.name }}
-                </div>
-                <div class="row">
+            </div>
+            <div id="modal-mensagem" class="ui-dialog" style="display: none;">
+                <label> Mensagem do sistema: </label>
+                {{ mensagemModal.message }}
+            </div>
+            <div class="container-fluid">
+                    
+                    <div style="text-align: center;" class="row">
+                        {{ user.name }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-default pull-right botao">Notificações</button>
+                            <button class="btn btn-default pull-right botao">Configurações</button>
+                            <button class="btn btn-default pull-right botao" ng-click="logOff()" >Sair</button>
+                        </div>
+                    </div>
+                <div class="row" id="projetos">
                     <div class="col-md-12">
-                        <button class="btn btn-default pull-right botao">Notificações</button>
-                        <button class="btn btn-default pull-right botao">Configurações</button>
-                        <button class="btn btn-default pull-right botao" ng-click="logOff()" >Sair</button>
-                    </div>
-                </div>
-                <div id="projetos">
-                    <div class="row" ng-repeat="projeto in meusProjetos">
-                        <div class="col-md-3 col-md-push-2">
+                        <div class="meus-projetos-display-item" ng-repeat="projeto in meusProjetos">
                             <div class="tituloProjeto" ng-click="acessarProjeto(projeto)" >
                                     <img src="/resources/images/icones/projeto.png" class="img-circle img-responsive center-block"/>
                                     <h3  class="tituloProjeto">{{ projeto.name }}</h3>
                                     <img src="/resources/images/icones/iconeNovoProjetoLinha.png" class="center-block"/>
                             </div>
                         </div>
+                        <div class="meus-projetos-display-item">
+                            <div class="tituloProjeto" ng-click="btn_criar_projeto()" >
+                                    <img src="/resources/images/icones/iconeNovoProjeto.png" class="img-circle img-responsive center-block"/>
+                                    <h3  class="tituloProjeto">Adicionar novo</h3>
+                                    <img src="/resources/images/icones/iconeNovoProjetoLinha.png" class="center-block"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div>                
+            </div>
         </div>
     </body>
 </html>

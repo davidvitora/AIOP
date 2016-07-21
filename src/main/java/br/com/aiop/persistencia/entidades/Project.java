@@ -1,6 +1,7 @@
 package br.com.aiop.persistencia.entidades;
 
 import java.text.DateFormat;
+import java.util.Date;
 
 
 public class Project {
@@ -8,9 +9,11 @@ public class Project {
     private int idOwner;
     private String name;
     private String description;
-    private DateFormat created;
-    private int userPermission;
+    private Date created;
 
+    public Project(){
+    }
+    
     public int getId() {
         return id;
     }
@@ -43,21 +46,12 @@ public class Project {
         this.description = description;
     }
 
-    public DateFormat getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(DateFormat created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
-
-    public int getUserPermission() {
-        return userPermission;
-    }
-
-    public void setUserPermission(int userPermission) {
-        this.userPermission = userPermission;
-    }
-    
     
 }

@@ -1,30 +1,25 @@
 var myApp = angular.module('myApp',['ngRoute']);
 
 myApp.controller('loginController', ["$scope", "$timeout", "$http", function($scope, $timeout, $http){
-   $( function() {
-    $( "#datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true
-    });
-    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-  } );     
-        
-   $scope.response;
-   $scope.login;
-   $scope.password;
-
    $scope.tryLogin = function(){
-       $http.post(
-       '/app/session/login'
+       $("#loginButton").hide();
+       $("#loginLoading").show();
+       $http.post('/app/session/login'
        ,{"login": $scope.login, "password" : $scope.password})
-       .success(function(data){
+       .then(function sucess(data){
            window.location.href = "/Faces/Welcome.jsp";
-       })
-       .error(function(data){
-           $scope.response = data;
-       });
-   };
-
+       },
+        function erro(data){
+           $("#loginButton").show();
+           $("#loginLoading").hide();
+           if(data.status === 401){
+                $scope.response = data.data;
+           }else{
+               $scope.response = "Ocorreu um erro ao realizar o login";
+           }   
+        });
+    };
+    
    $scope._login = "";
    $scope._password = "";
    $scope._name = "";
@@ -33,56 +28,115 @@ myApp.controller('loginController', ["$scope", "$timeout", "$http", function($sc
    $scope._email = "";
    $scope.retornos;
    
-   $scope.cadastrarUsuario = function(projeto){
+   $( function(){
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1950:2012"
+    });
+    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+    });
+  
+  
+    
+    
+    $scope.btn_criar_usuario_text = function(){
+        $("#criar-usuario").dialog({
+            title: "Criar conta",
+            modal: true,
+            autoOpen: true,
+            closeOnEscape: true,
+            show: { effect: "fade", duration: 200},
+            hide: { effect: "fade", duration: 200}
+        });
+    };
+    $scope.response;
+    $scope.login;
+    $scope.password;
+    $("#btn_criar_usuario").click(function(){
        $http.post('/app/usuario', {id: "0", login: $scope._login, password: $scope._password, name: $scope._name,  birthDay: $scope._birthDay + "T00:00:00-00:00" , contact: $scope._contact, email: $scope._email, created : "1000-01-01"  })
        .success(function(data){
-           tryLogin({login: $scope._login, password: $scope._password});
+           $scope.login = $scope._login;
+           $scope.password = $scope._password;
+           $("#criar-usuario").dialog("close");
+           
        })
        .error(function(data){
-           $scope.retornos = data;    
+           $scope.retornos = data;
            $("#Validacao").show();
        });
-   };
+    });
 
 }]);
 
 myApp.controller('welcomeController', ["$scope", "$timeout", "$http", function($scope, $timeout, $http){
         
-      $( function() {
-        $( "#criar-projeto" ).dialog({
-          autoOpen: true
+        //Mostra a pagina e esconde o carregamento quando a pagina está pronta
+        $("#controller").ready( function(){
+            $("#controller").show();
+            $('#Loading').hide();
         });
-
-        $( "#opener" ).on( "click", function() {
-          $( "criar-projeto" ).dialog( "open" );
-        });
-      } );
-      
-      $scope._nomeProjeto;
-      $scope._descricaoProjeto;
-      
-    //Meus projeto
-    $scope.meusProjetos;
-    $http.get('/app/projetos/dono')
-       .success(function(data){
-           $scope.meusProjetos = data;
-       })
-       .error(function(data){
-
-    });
+        //-----------------------------------
         
         
-    $scope.courierModal;
-    $scope.acessarProjeto = function(projeto){
-       $http.post('/app/projetos/acessar', projeto)
-       .success(function(data){
-           window.location.href = "/Faces/Painel/Master.jsp";
-       })
-       .error(function(data){
-           $scope.courierModal = data;
-           $("#modalMensagem").show();
-       });
-    };
+        //Modal de mensagens
+        $scope.mensagemModal;
+        $( function(){
+             $( "#modal-mensagem" ).dialog({
+                title: "Criar projeto",
+                modal: true,
+                autoOpen: false,
+                closeOnEscape: true,
+                show: { effect: "fade", duration: 200},
+                hide: { effect: "fade", duration: 200}
+            });
+        });
+        //----------------------------------
+        
+        //Verifica os projetos do usuário no banco
+        $scope.updateProjetos = function(){
+            $scope.meusProjetos;
+            $http.get('/app/projetos/dono')
+               .success(function(data){
+                   $scope.meusProjetos = data;
+                   $('#Loading').hide();
+               })
+               .error(function(data){
+
+            });
+        };
+        $scope.updateProjetos();
+        
+        //Acessa o projeto
+        $scope.acessarProjeto = function(projeto){
+           $http.post('/app/projetos/acessar', projeto)
+           .success(function(data){
+               window.location.href = "/Faces/Painel/Master.jsp";
+           })
+           .error(function(data){
+               $scope.mensagemModal = data;
+               $( "#modal-mensagem" ).dialog("open");
+           });
+        };
+        
+        //Abre o modal de criação de projeto
+        $scope.btn_criar_projeto = function(){
+            $( "#criar-projeto" ).dialog({
+                title: "Criar projeto",
+                modal: true,
+                autoOpen: true,
+                closeOnEscape: true,
+                show: { effect: "fade", duration: 200},
+                hide: { effect: "fade", duration: 200}
+            });
+            $( "#criar-projeto" ).dialog("open");
+        };
+        
+        
+      
+    
+        
+    
    
    
    
@@ -113,6 +167,26 @@ myApp.controller('welcomeController', ["$scope", "$timeout", "$http", function($
        })
        .error(function(data){
        });
+       
+    $scope._name = "";
+    $scope._description = "";
+    $scope.validacao;
+
+    $("#btn_criar_projeto_criar").click(function(){
+        $('#Loading').show();
+        $http.post('/app/projetos', {id: "0", idOwner: "0", name: $scope._name , description: $scope._description, created: "1000-01-01T00:00:00-00:00"})
+        .success(function(data){
+            $scope.updateProjetos();
+            $('#Loading').hide();
+            $("#criar-projeto").dialog("close");         
+        })
+        .error(function(data){
+            $scope.validacao = data;
+            $("#Validacao").show();
+            $('#Loading').hide();
+        });
+        
+    });
 
 
 }]);

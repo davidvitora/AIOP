@@ -39,52 +39,37 @@ public void jspInit() {
 
 </head>
 <body ng-controller="loginController">
-    <div class="Logindiv"  >
+    <div  class="Logindiv"  >
         <img class="img-responsive center-block" src="/resources/images/Logo.png" />
-        <form>
+        <form class="formulario-login">
             <input id="login" type="text" ng-model="login" class="formulario-login form-control" placeholder="Login">
             <input id="senha" type="text" ng-model="password" class=" formulario-login form-control" placeholder="Password">
-            <button class=" formulario-login btn btn-default"  ng-click="tryLogin()" >Logar</button>
+            <img id="loginLoading"  src="/resources/gif/load.gif" />
+            <button id="loginButton" class=" formulario-login btn btn-default"  ng-click="tryLogin()" >Acessar</button>
         </form>
-        <div>{{ response }}</div>
+        <div class="formulario-login" >{{ response }}</div>
     </div>
-    <footer>
-        <div> Não pussui conta? <button type="button" class="btn-txt" data-toggle="modal" data-target="#Modal-cadastro-conta"> Criar conta </button> </div>
+    <footer class="footer">
+        <div> Não pussui conta? <button id="btn_criar_usuario_text" ng-click="btn_criar_usuario_text()" type="button" class="btn-txt"> Criar conta </button> </div>
         <div> Esqueceu sua senha ? <button class="btn-txt"> Redefinir senha </button> </div>
     </footer>
     
-    
-    
-    <div class="modal fade" id="Modal-cadastro-conta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Crie sua conta</h4>
+    <div id="criar-usuario" class="ui-dialog" style="display: none;">
+        <form id="formulario-cadastro-conta">
+            <input type="text" ng-model="_login" class="formulario-login form-control" placeholder="Login de usuário" >
+            <input type="password" ng-model="_password" class=" formulario-login form-control" placeholder="Senha" >
+            <input type="text" ng-model="_name" class="formulario-login form-control" placeholder="Nome" >
+            <input id="datepicker" type="text" ng-model="_birthDay" class="formulario-login form-control" placeholder="Data de nascimento" >
+            <input type="text" ng-model="_email" class="formulario-login form-control" placeholder="E-mail" >
+            <input type="text" ng-model="_contact" class="formulario-login form-control" placeholder="Contato" >
+        </form>
+        <div id="Validacao" class="alert alert-danger" >
+            <div>
+                <div role="alert" ng-repeat="retorno in retornos.messages"><p>{{ retorno }}</p></div>
             </div>
-            <div class="modal-body">
-                <form id="formulario-cadastro-conta">
-                    <input type="text" ng-model="_login" class="formulario-login form-control" placeholder="Login de usuário" >
-                    <input type="password" ng-model="_password" class=" formulario-login form-control" placeholder="Senha" >
-                    <input type="text" ng-model="_name" class="formulario-login form-control" placeholder="Nome" >
-                    <input id="datepicker" type="text" ng-model="_birthDay" class="formulario-login form-control" placeholder="Data de nascimento" >
-                    <input type="text" ng-model="_email" class="formulario-login form-control" placeholder="E-mail" >
-                    <input type="text" ng-model="_contact" class="formulario-login form-control" placeholder="Contato" >
-                </form>
-                <div id="Validacao" class="alert alert-danger" >
-                    <div>
-                        <div role="alert" ng-repeat="retorno in retornos.messages"><p>{{ retorno }}</p></div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary" ng-click="cadastrarUsuario()" >Criar conta</button>
-            </div>
-          </div>
         </div>
+        <button id="btn_criar_usuario">Criar usuário</button>
     </div>
-    
 </body>
 </html>
 <% } %>

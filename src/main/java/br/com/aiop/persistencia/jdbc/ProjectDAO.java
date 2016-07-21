@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.json.JSONObject;
 
@@ -31,20 +33,44 @@ public class ProjectDAO {
         this.con = ConexaoFactory.getConnection();
     }
     
-    public void saveResposta(String titulo, String corpo, int idtopico){
-        String sql = "insert into respostas (titulo,corpo,idtopico) values ( ? , ? , ?);";
+    public boolean saveProjeto(Project project){
+        String sql = "insert into aiop.project (name, description,idOwner, created)"
+                + " values ( ? , ? , ?, ?);";
         try{
-        PreparedStatement prep = con.prepareStatement(sql);
-        prep.setString(1, titulo);
-        prep.setString(2, corpo);
-        prep.setString(3, Integer.toString(idtopico));
-        prep.execute();
+            PreparedStatement prep = con.prepareStatement(sql);
+            prep.setString(1, project.getName());
+            prep.setString(2, project.getDescription());
+            prep.setInt(3, project.getIdOwner());
+            prep.setDate(4, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+            prep.execute();
+            //Insere permissão para acessar o projeto para o usuário
+            sql = "insert into aiop.permission (idUser, idProject, userPermission) values (?,?,?)";
+            prep = con.prepareStatement(sql);
+            prep.setString(1, project.getName());
+            return true;
         }catch(SQLException e){
             
         }
+        return false;
     }
     
-    //Retorna a lista de projetos em que o usuário participa
+    //Da permissão para um usuário em determinado projeto e retorna verdadeiro em caso de sucesso
+    public boolean givePermissionAcessProjeto(int idUser, Project project, int permission){
+        String sql = "insert into aiop.permission (idUser, idProject, userPermission) values (?,?,?)";
+        try{
+            PreparedStatement prep = con.prepareStatement(sql);
+            prep.setInt(1, idUser);
+            prep.setInt(2, project.getId());
+            prep.setInt(3, permission);
+            prep.execute();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    //Retorna a lista de projetos em que o usuário participa--INOPERANTE
     public List<Project> getOtherProjects(User user){
         List<Project> projects = new ArrayList();
         Project project;
@@ -61,7 +87,6 @@ public class ProjectDAO {
                 if(resultadoPermissoes.getInt("userPermission") > 1){
                     //Inicia um projeto de define a permissão para o usuário
                     project = new Project();
-                    project.setUserPermission(resultadoPermissoes.getInt("userPermission"));
                     
                     //Preparando prep para buscar empresa e pega resultado
                     prep.setString(1, resultadoPermissoes.getString("idProject"));
@@ -72,7 +97,7 @@ public class ProjectDAO {
                         project.setIdOwner(resultadoProjeto.getInt("idOwner"));
                         project.setName(resultadoProjeto.getString("name"));
                         project.setDescription(resultadoProjeto.getString("description"));
-                        project.setCreated(new SimpleDateFormat(resultadoProjeto.getString("created")));
+                        project.setCreated(resultadoProjeto.getDate("created"));
                     }
                     //Adicona o projeto na lista
                     projects.add(project);
@@ -96,12 +121,11 @@ public class ProjectDAO {
             //Consulta os projetos e adiciona na lista
             while(resultProjects.next()){
                 project = new Project();
-                project.setUserPermission(1);
                 project.setId(resultProjects.getInt("id"));
                 project.setIdOwner(resultProjects.getInt("idOwner"));
                 project.setName(resultProjects.getString("name"));
                 project.setDescription(resultProjects.getString("description"));
-                project.setCreated(new SimpleDateFormat(resultProjects.getString("created")));
+                project.setCreated(resultProjects.getDate("created"));
                 projects.add(project);
             }
       
@@ -119,7 +143,16 @@ public class ProjectDAO {
             prep.setString(1, Integer.toString(user.getId()));
             prep.setString(2, Integer.toString(idProject));
             ResultSet resultProject = prep.executeQuery();
-            //Se o usuario tiver acesso ao projeto, retornara verdadeiro
+            //Se o usuario ser membro do projeto, retornara verdadeiro
+            while(resultProject.next()){
+                    return true;
+            }
+            //Se o usuário ser dono do projeto retornará verdadeiro
+            sql = "select * from aiop.project where id = ? and idOwner = ?";
+            prep = con.prepareStatement(sql);
+            prep.setInt(1, idProject);
+            prep.setInt(2, user.getId());
+            resultProject = prep.executeQuery();
             while(resultProject.next()){
                     return true;
             }
@@ -145,7 +178,7 @@ public class ProjectDAO {
                 project.setIdOwner(resultProjects.getInt("idOwner"));
                 project.setName(resultProjects.getString("name"));
                 project.setDescription(resultProjects.getString("description"));
-                project.setCreated(new SimpleDateFormat(resultProjects.getString("created")));
+                project.setCreated(resultProjects.getDate("created"));
                 return project;
             }
             
@@ -171,6 +204,22 @@ public class ProjectDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+    
+    //Verifica se o nome do projeto está disponivel
+    public boolean isAvaliable(String projectName){
+        String sql = "SELECT * FROM aiop.project where name = ? ";
+        try{
+            PreparedStatement prep = con.prepareStatement(sql);
+            prep.setString(1, projectName);
+            ResultSet result = prep.executeQuery();
+            while(result.next()){
+                return false;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return true;
     }
    
 }

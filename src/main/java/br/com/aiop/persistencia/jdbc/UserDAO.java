@@ -88,9 +88,9 @@ public class UserDAO {
             prep.setDate(5, new java.sql.Date(user.getBirthDay().getTime()));
             prep.setString(6, user.getContact());
             prep.setDate(7, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-            if(prep.execute()){
-                return true;
-            }
+            prep.execute();
+            return true;
+            
         }catch(SQLException e){
             e.printStackTrace();
         }

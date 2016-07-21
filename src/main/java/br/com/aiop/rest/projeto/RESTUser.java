@@ -29,7 +29,7 @@ public class RESTUser {
         courier = Validate.validateUser(user, dao);
         if(courier == null){
             courier = new Courier();
-            if(dao.save(user)){
+            if(dao.save(user)  == false){
                 courier.setCode(200);
                 courier.setMessage("All rigth");
             return Response.status(200).entity(courier).build();

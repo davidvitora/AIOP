@@ -21,10 +21,6 @@ h3.tituloProjeto{
     text-align: center;
 }
 
-h3.tituloProjeto:hover{
-    color: #f7f7f7;
-    padding-top: 20px;
-}
 
 div.tituloProjeto:hover{
     cursor: pointer;
@@ -61,17 +57,54 @@ div.Logindiv{
     width: 200px;
 }
 
+img#loginLoading{
+    display: none;
+    margin-top: 10px;
+}
+
 button.btn-txt{
     background: none;
     border: none;
     color: #FF5500;
 }
 
-footer{
-    margin-top: 0px;
+footer.footer{
+    position: absolute;
+    bottom: 0px;
     color: white;
+    text-align: center;
+    width: 100%;
 }
 
 div#Validacao{
     display: none;
 }
+
+#Loading{
+    position: absolute;
+    margin-left: 0px;
+    margin-right: 0px;
+    top: 5px;
+}
+
+#controller{
+    margin-top: 25px;
+}
+
+div.meus-projetos-display{
+	width : 200px;
+	height : 100px;
+	margin : 0 auto;
+	padding : 5px;
+	display :  inline-block;
+
+}
+
+div.meus-projetos-display-item{
+	display: inline-block;
+        width: 200px;
+        height: 250px;
+        padding: 10px;
+
+}
+
