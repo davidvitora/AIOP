@@ -1,0 +1,122 @@
+/*Geral*/
+
+body,html{
+	overflow: auto;
+	background-color: rgb(255,255,255);
+	height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.top{
+	height: 20px;
+	width: 100%;
+	background-color: silver;
+}
+
+.coluna1{
+    background-color: red;
+    height: 100%;
+}
+
+.coluna2{
+    background-color: blue;
+}
+
+.conteudo{
+	margin: 15px 15px 15px 15px;
+	height: 200px;
+	background-color: white;
+	overflow-y: visible;
+	overflow-y: hidden;
+	min-height: 600px;
+}
+
+.coluna3{
+    background-color: black;
+    height: 100%;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid red;
+}
+
+
+.container-fluid{
+	height:auto; min-height:100%;
+}
+
+/*menu topo*/
+#top-menu{
+	color: rgb(255,255,255);
+	background-color: #2B2B2B;
+}
+
+/*Esquerda*/
+
+#menu{
+	min-height:100% ;
+	height: 100% ;
+	padding-bottom: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+.menu-itens{
+	height:auto 100% !important; 
+	min-height:100% !important;
+	margin-bottom: 0xp;
+	margin-top: 20px;
+}
+
+#perfil{
+	color: #2B2B2B;
+}
+
+
+/*Meio*/
+
+#meio{
+	background-color: #B2B2B1;
+	padding: 0px;
+}
+
+
+
+.iten-da-linha{
+	height: 200px;
+	background-color: white;
+	margin-bottom: 20px;
+}
+
+/*Direita*/
+#lateral{
+box-shadow
+}
+
+.lateral-itens{
+	background-color: #2B2B2B;
+	margin-top: 20px;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}

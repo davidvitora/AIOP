@@ -18,28 +18,82 @@ body,html{
 	background-color: #2B2B2B;
 }
 
+.icon-top-menu{
+    height: 30px;
+    width: 30px;
+    float: right;
+    margin: 5px 5px 0px 10px;
+    display: none;
+}
+
+.icon-top-menu{
+    cursor: pointer;
+}
+
+.icon-top{
+    height: 25px;
+    width: 25px;
+    float: right;
+    margin: 5px 5px 0px 10px;
+}
+
+.icon-top:hover{
+    cursor: pointer;
+}
+
+button.top-menu-iten{
+    
+    position: relative;
+    float: right;
+    margin: 5px 5px 0px 5px;
+    
+    border-color: #1E1E1E;
+    padding: 5px;
+    border-radius: 8px;
+    font-family: 'Archivo Narrow', sans-serif;
+    color: white;
+    background-color: #1E1E1E;
+}
+
+button.top-menu-iten:hover{
+    color: #1E1E1E;
+    background-color: white;
+    cursor: pointer;
+}
+
+div.top-menu-iten{
+    color: white;
+    position: relative;
+    float: left;
+    margin: 10px 10px 10px 10px;
+    font-family: 'Archivo Narrow', sans-serif;
+}
 
 /*Menu*/
-.menu-coluna1{
-    background-color: rgb(250,250,250);;
-    height: 100%;
+#perfil{
+    margin: 20px 10px 30px 10px;
+    border-bottom: 1px solid #B2B2B1;
+    font-family: 'Archivo Narrow', sans-serif;
 }
 
 menu-itens{
     color: #B2B2B1;
 }
 
-#perfil{
-    margin: 20px 10px 30px 10px;
-    border-bottom: 1px solid #B2B2B1;
+div.menu-opcoes{
+    text-decoration: none;
 }
-
 
 a.menu-block{
     text-decoration: none;
     text-transform: none;
     color: #2B2B2B;
     font-size: 12pt;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+a.menu-block:hover{
+    background-color: rgba(0,0,0,0.1);
 }
 
 
@@ -48,13 +102,17 @@ div.menu-block{
     margin-left: 10px;
 }
 
-
+.menu-coluna1{
+    background-color: rgb(250,250,250);;
+    height: 100%;
+}
 
 .coluna2{
     background-color: #B2B2B1;
     height: 100%;
     overflow-y: scroll;
 	overflow-x: hidden;
+    margin: 0px;
 }
 
 .conteudo{
@@ -99,12 +157,20 @@ div.menu-block{
         width: 100%;
     }
 
-    .menu-coluna1{
+    .coluna3{
     	display: none;
     }
 
-    .coluna3{
-    	display: none;
+    .icon-top-menu{
+        display: block;
+    }
+
+    .menu-coluna1{
+        width: 40%;
+        position: fixed;
+        display: none;
+        top: 20;
+        left: 0;
     }
 }
 

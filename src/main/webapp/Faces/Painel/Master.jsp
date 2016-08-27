@@ -23,54 +23,55 @@ public void jspInit() {
     }else{%>
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-    <head>
-        <title>AIOP</title>
-        <meta charset="utf-8">
-        <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-        <link id="Style" href="/resources/css/style.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-        <script src="/resources/js/angular.js"></script>
-        <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
-        <script src="https://code.angularjs.org/1.5.5/angular-sanitize.js"></script>
-        <script src="/resources/js/app.js"></script>
-        <jsp:useBean id="user" class="br.com.aiop.persistencia.entidades.User" scope="session">
-        </jsp:useBean>
-    </head>
-    <body>
-        <div class="container-fluid" ng-controller="mainController" >
-            <div class="row">
-                <div class="painelEsquerdo col-md-2 " id="menu">
-                    <div class="esquerda" >
-                                <div id="perfil">
-                                        <div id="fotoPerfil">
-                                                <img src="/resources/images/icones/projeto.png"  class="img-circle img-responsive center-block"/>
-                                        </div>
-                                    <h4> {{ projeto.name }} </h4>
-                                        <p style="text-align:center;"> </p>
-                                        
-                                </div>
-                                <ul class="nav nav-pills nav-stacked itemMenu">
-                                  <li><a class="itemMenu" href="#/">HOME</a></li>
-                                  <li><a class="itemMenu" href="#/membros">MEMBROS</a></li>
-                                  <li><a class="itemMenu" href="#/definitions">DEFINIÇÕES</a></li>
-                                  <li><a class="itemMenu" href="#/assignments">TAREFAS</a></li>
-                                  <li><a class="itemMenu" href="#/archives">ARQUIVOS</a></li>
-                                  <li><a class="itemMenu" href="#/personalization">PERSONALIZAÇÃO</a></li>
-                                  <li><a class="itemMenu" href="#/planejamento">PLANEJAMENTO</a></li>
-                                </ul>
-                        </div>
-                </div>
-                <div class="col-md-8">
-                    <div ng-view></div>
-                </div>
-                <div class="col-md-2">
-                        <div class="btn-group" id="botoesDireita">
-                          <button type="button" class="btn btn-default">Notificações</button>
-                          <button type="button" class="btn btn-default" ng-click="acessarConfiguracoes()" >Configurações</button>
-                        </div>
-                </div>
-        </div>
-    </div>
-    </body>
+<head>
+	<title>AIOP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/resources/css/style.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+        
+    <script src="/resources/js/angular.js"></script>
+    <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+    <script src="https://code.angularjs.org/1.5.5/angular-sanitize.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+    <script src="/resources/js/jquery-ui.js"></script>
+    <script src="/resources/js/app.js"></script>
+    
+
+</head>
+<body ng-controller="mainController">
+<div class="top">
+	<div class="top-menu-iten">João da silva</div>
+	<img id="menu" class="icon-top-menu"  ng-click="menu_view_action()"  src="/resources/icons/icon.svg"/>
+	<button class="top-menu-iten" ng-click="logOff()"> Sair </button>
+        <button class="top-menu-iten" ng-click="view_home()"> Home </button>
+	<img class="icon-top"  alt="notificações" src="/resources/icons/iconnotification.svg"/>
+</div>
+<div class="coluna3 col-2">
+</div>
+<div class="coluna2 col-8">
+	<div class="row">
+		<div ng-view></div>
+	</div >
+</div>
+<div class="menu-coluna1 col-2">
+	<div class="menu-itens">
+		<div id="perfil">
+			<div>
+				<img src="/resources/images/perfil.jpg" class="img-reponsiva img-circular"/>
+			</div>
+			<p style="text-align:center;">{{ projeto.name }}</p>
+		</div>
+		<div class="menu-opcoes">
+		  <div class="menu-block"><a class="menu-block" href="#/membros">HOME</a></div>
+		  <div class="menu-block"><a class="menu-block" href="#membros">MEMBROS</a></div>
+                  <div class="menu-block"><a class="menu-block" href="planning.html">PLANEJAMENTO</a></div>
+		  <div class="menu-block"><a class="menu-block" href="assignments.html">TAREFAS</a></div>
+		  <div class="menu-block"><a class="menu-block" href="#/arquivos">ARQUIVOS</a></div>
+		</div>
+	</div>
+</div>
+</body>
 </html>
 <% } %>

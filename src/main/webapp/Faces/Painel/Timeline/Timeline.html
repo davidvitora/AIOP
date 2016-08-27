@@ -1,3 +1,27 @@
-<div id="publicacoes" ng-repeat="time in timeline">
-    <div ng-bind-html=" time.description | trusted"></div>
+<div id="publicacoes" ng-repeat="timeline in project_timeline">
+    <div class="timeline_postagem" ng-if="timeline.tipo === 1">
+        <div class="timeline_postagem_usuario">
+            <img src="/resources/images/perfil.jpg" class="img-reponsiva img-circular img-center"/>
+            <a class="timeline_postagem_usuario"> {{ timeline.usuario }}</a>
+        </div>
+        <div class="timeline_postagem_conteudo">
+            <p class="timeline_postagem_conteudo"> {{ timeline.conteudo }}</p>
+            <a class="timeline_postagem_conteudo"> Postado em: {{ timeline.data }} </a>
+        </div>
+        <div class="timeline_postagem_comentarios">
+            <div class="timeline_postagem_comentarios_contagem">
+                <a class="timeline_postagem_comentarios_contagem"> {{ timeline.comentarios.cont }} Comentários </a>
+            </div>
+            <div ng-repeat="comentario in timeline.comentarios.comentario" class="timeline_postagem_comentario">
+                <div class="timeline_postagem_comentario_usuario">
+                    <img src="/resources/images/perfil.jpg" class="img-reponsiva img-circular img-align"/>
+                    <a>{{ comentario.usuario }}</a>
+                </div>
+                <div class="timeline_postagem_comentario_conteudo">
+                    <p class="timeline_postagem_comentario_conteudo">{{ comentario.conteudo }}</p>
+                    <a class="timeline_postagem_comentario_conteudo">Postado Em: {{ comentario.data }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

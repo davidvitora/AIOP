@@ -16,6 +16,7 @@ public class Courier {
     private int code;
     private String message;
     private List<String> messages = new ArrayList();
+    private List<Object> retorno = new ArrayList();
     
     public Courier(){
         this.code = 0;
@@ -48,6 +49,14 @@ public class Courier {
     
     public void insertMessages(String message){
         this.messages.add(message);
+    }
+
+    public List<Object> getRetorno() {
+        return retorno;
+    }
+
+    public void setRetorno(List<Object> retorno) {
+        this.retorno = retorno;
     }
     
 }

@@ -1,0 +1,20 @@
+
+<div class="row" >
+    <p class="TituloArquivos">ARQUIVOS</p>
+    <div class="itemArquivo" ng-repeat="arq in arquivos">
+        <div class="cabecalhoItemArquivo">
+            <button class="btnTopItemArquivo" style="float: left" ng-click="downloadArquivo(arq.key)"><img class="svg" src="/resources/icons/Icon-garbage.svg"/></button>
+            <button class="btnTopItemArquivo" style="float: right" ng-click="downloadArquivo(arq.key)"><img class="svg" src="/resources/icons/Icon-pencil.svg"/></button>
+        </div>
+        <div class="corpoItemArquivo">
+            <a>Versão: {{ arq.version }}</a>
+            <p class="tituloCorpoItemArquivo">{{ arq.name }}</p>
+        </div>
+        <div class="rodapeItemArquivo">
+           <button class="btnItemArquivo" style="float: left" ng-click="downloadArquivo(arq.key)">Baixar<img class="svg" src="/resources/icons/Icon-download.svg"/></button>
+           <button class="btnItemArquivo" style="float: right" ng-click="downloadArquivo(arq.key)">Atualizar<img class="svg" src="/resources/icons/Icon-update.svg"/></button> 
+        </div>          
+    </div>
+</div>
+
+<button ng-click="uploadArquivo()" class="uploadButton"><img class="svg-upload" src="/resources/icons/Icon-upload.svg"/>Enviar</button>

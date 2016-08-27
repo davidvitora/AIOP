@@ -39,7 +39,7 @@ public void jspInit() {
         <img id="Loading"  alt="Loading" src="/resources/gif/load.gif" />
         <div id="controller" style="display: none;" ng-controller="welcomeController">
             <div id="criar-projeto" class="ui-dialog" style="display: none">
-                <label> Digite os dados do projeto a ser criado: </label>
+                <label > Digite os dados do projeto a ser criado: </label>
                 <input type="text" ng-model="_name" class="formulario-login form-control" placeholder="Nome do projeto" >
                 <input type="text" ng-model="_description" class=" formulario-login form-control" placeholder="Descrição do projeto" >
                 <button id="btn_criar_projeto_criar" class="btn btn-default">Criar</button>

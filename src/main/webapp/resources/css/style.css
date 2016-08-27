@@ -1,125 +1,404 @@
+@import url(https://fonts.googleapis.com/css?family=Archivo+Narrow:400,700);
 /*Geral*/
 
-body{
-    background-image: URL("../images/background.jpg");
-    background-size: 100%;
-}
-.col-md-8{
-	text-align: center;
-	font-size: 20px;
+body,html{
+	overflow: auto;
+	background-color: rgb(255,255,255);
+	height: 100%;
+	margin: 0px;
 }
 
-
-/*Esquerda*/
-
-#perfil{
-	
-        width: 100%;
-    margin-top: 20px;
-    text-align: center;
+* {
+    box-sizing: border-box;
 }
 
-a.itemMenu{
-    color: white;
+.top{
+	height: 40px;
+	width: 100%;
+	background-color: #2B2B2B;
 }
-.painelEsquerdo{
-    color:white;
-    margin-top: 20px;
-    padding: 0px;
-    margin: 0px;
+
+.icon-top-menu{
+    height: 30px;
+    width: 30px;
+    float: right;
+    margin: 5px 5px 0px 10px;
+    display: none;
+}
+
+.icon-top-menu{
+    cursor: pointer;
+}
+
+.icon-top{
+    height: 25px;
+    width: 25px;
+    float: right;
+    margin: 5px 5px 0px 10px;
+}
+
+.icon-top:hover{
+    cursor: pointer;
+}
+
+button.top-menu-iten{
+    
     position: relative;
-}
-.esquerda{
-        width: 225px; 
-        height: 800px;
-	position: fixed;
-        margin: 0px;
-        background-color: rgb(43,43,43);
-        
-}
-
-
-
-
-/*Meio*/
-
-.well{
-	position: fixed;
-	width: 1000px;
-	background: black;
-	color: white;
-}
-#publicacoes img{
-	box-shadow: 4px 4px 3px;
-}
-.container{
-	
+    float: right;
+    margin: 5px 5px 0px 5px;
+    
+    border-color: #1E1E1E;
+    padding: 5px;
+    border-radius: 8px;
+    font-family: 'Archivo Narrow', sans-serif;
+    color: white;
+    background-color: #1E1E1E;
 }
 
-
-
-/*Direita*/
-
-#botoesDireita{
-	width: 225px; 
-        height: 800px;
-	position: fixed;
-        margin: 0px;
-        background-color: rgb(43,43,43);
-}
-
-/* tela de planejamento */
-
-div.itemPlanejamento{
-    margin-left: 10px;
-    margin-top: 20px;
-}
-
-div.modalPlanejamentoAdd{
-    border-radius: 4px;
-    border: 1px solid grey;
-    position: fixed;
-    margin-left: 0px;
-    margin-right: 0px;
-    right: 500px;
-    bottom: 250px;
-    width: 400px;
-    height: 200px;
+button.top-menu-iten:hover{
+    color: #1E1E1E;
     background-color: white;
-    z-index: 1;
+    cursor: pointer;
 }
 
-div.NovoEvento{
-    margin: 5px;
+div.top-menu-iten{
+    color: white;
+    position: relative;
+    float: left;
+    margin: 10px 10px 10px 10px;
+    font-family: 'Archivo Narrow', sans-serif;
 }
 
-input.itemFormulario{
-    margin-top: 4px;
+/*Menu*/
+#perfil{
+    margin: 20px 10px 30px 10px;
+    border-bottom: 1px solid #B2B2B1;
+    font-family: 'Archivo Narrow', sans-serif;
 }
-select.itemFormulario{
-    margin-top: 10px;
+
+menu-itens{
+    color: #B2B2B1;
+}
+
+div.menu-opcoes{
+    text-decoration: none;
+}
+
+a.menu-block{
+    text-decoration: none;
+    text-transform: none;
+    color: #2B2B2B;
+    font-size: 12pt;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+a.menu-block:hover{
+    background-color: rgba(0,0,0,0.1);
 }
 
 
-/* timeline */
-
-div.timeline{
-    text-align: center;
-    background-color:  ghostwhite;
-    border-radius: 2px;
-    color: #333;
+div.menu-block{
     margin-bottom: 10px;
-    margin-left: 0px;
-    border-left: 10px solid rgb(43, 43, 43);
+    margin-left: 10px;
 }
 
-h3.timeline{
-    border-bottom: 1px solid rgb(43, 43, 43);
+.menu-coluna1{
+    background-color: rgb(250,250,250);;
+    height: 100%;
+}
+
+.coluna2{
+    background-color: #B2B2B1;
+    height: 100%;
+    overflow-y: scroll;
+	overflow-x: hidden;
+    margin: 0px;
+}
+
+.conteudo{
+	margin: 5px 5px 5px 5px;
+	height: 200px;
+	background-color: white;
+}
+
+.coluna3{
+    background-color: #2B2B2B;
+    height: 100%;
+}
+
+
+/*---------------------------------------------Menu arquivos---------- */
+
+p.TituloArquivos{
+    color: #2B2B2B;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 20pt;
+    border-bottom: 1px solid #2B2B2B;
+    margin: 20px 20px 20px 20px;
+    width: 100px;
+}
+
+div.itemArquivo{
+    background-color: white;
+    display: inline-block;
+    width: 240px;
+    margin: 15px;
+    color: #2B2B2B;
+}
+div.cabecalhoItemArquivo{
+    background-color: #2B2B2B;
+    height: 40px;
+}
+
+img.svg{
+    height: 20px;
+    width: 20px;
+    margin: 3px 3px -3px 3px;
+    padding: 0xp;
+}
+button.btnTopItemArquivo{
+    background-color: #2B2B2B;
+    border: 0px solid #2B2B2B;
+    margin: 10px;
+}
+
+button.btnTopItemArquivo:hover{
+    cursor: pointer; 
+}
+
+button.btnItemArquivo{
+    background-color: white;
+    border: 0px solid white;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 14pt;
+    margin: 5px;
+    font-weight: bold;
+}
+
+button.btnItemArquivo:hover{
+    cursor: pointer; 
+}
+
+div.corpoItemArquivo{
+    font-family: 'Archivo Narrow', sans-serif;
+    margin: 15px 15px 0px 15px;
+    text-align: center;
+    border-bottom: 1px solid #2B2B2B;
+}
+
+p.tituloCorpoItemArquivo{
+    font-size: 14pt;
+}
+
+a.cabecalhoItemArquivo{
+    font-size: 3pt;
+    font-size: larger;
+}
+
+
+div.rodapeItemArquivo{
+    margin: 5px 10px 10px 10px;
+}
+
+button.uploadButton{
+    font-size: 30pt;
+    font-family: 'Archivo Narrow', sans-serif;
+    background-color: #2B2B2B;
+    margin: 20px;
+    color: white;
+    border: 0px solid #2B2B2B;
+    font-weight: bold;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+img.svg-upload{
+    height: 60px;
+    width: 60px;
+    margin: 10px 0px 0px 10px;
+}
+
+/*-------------------------------------------------------------------------*/
+
+
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+    height: 100%;
+}
+
+[class*="col-"] {
+    float: left;
     padding: 10px;
-    width: 200px;
+    border: 1px solid silver;
 }
-span.glyphicon{
-    font-size: 70px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 800px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+
+    .coluna3{
+    	display: none;
+    }
+
+    .icon-top-menu{
+        display: block;
+    }
+
+    .menu-coluna1{
+        width: 40%;
+        position: fixed;
+        display: none;
+        top: 20px;
+        left: 0;
+    }
 }
+
+
+
+/**
+Util*/
+img.img-reponsiva {
+    max-width: 100%;
+    height: auto;
+}
+
+.img-circular{
+    border-radius: 50%;
+}
+
+.img-center{
+    display: block;
+    margin: auto;
+}
+
+/* Postagem */
+a.timeline_postagem_usuario {
+    margin: 20px 0px 0px 0px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+
+div.timeline_postagem {
+    background-color: #2B2B2B;
+    margin: 20px;
+}
+
+div.timeline_postagem_comentario {
+    height: auto;
+    clear: both;
+}
+
+div.timeline_postagem_comentario_conteudo p {
+    margin: 10px;
+}
+
+div.timeline_postagem_comentarios {
+    clear: both;
+    margin: 10px 15px 0px 15px;
+}
+
+div.timeline_postagem_usuario {
+    float: left;
+    width: 100px;
+    color: white;
+    text-align: center;
+    margin: 25px 10px 10px 25px;
+}
+
+div.timeline_postagem_comentario_conteudo {
+    min-height: 150px;
+    width: calc(100% - 140px);
+    color: white;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 12pt;
+    display: inline-block;
+    margin: 10px;
+    border-width: 7px;
+}
+
+p.timeline_postagem_comentario_conteudo {
+    min-height: 100px;
+    font-size: 16px;
+}
+
+a.timeline_postagem_comentario_conteudo {
+    float: right;
+    font-size: 10pt;
+    margin: 10px;
+}
+
+div.timeline_postagem_comentario_usuario {
+    text-align: center;
+    width: 100px;
+    margin: 10px;
+    font-family: 'Archivo Narrow',     sans-serif;
+    font-size: 10pt;
+    color: white;
+    float: left;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #60605F;
+}
+
+img.img-align {
+    width: 70px;
+    margin-left: 10px;
+}
+
+div.timeline_postagem_conteudo {
+    margin: 10px;
+    width: calc(100% - 155px);
+    background-color: white;
+    min-height: 200px;
+    padding: 0px;
+    float: left ;
+}
+
+div.timeline_postagem_comentarios_contagem {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 14pt;
+    color: white;
+    text-align: center;
+    margin: 15px;
+    border-bottom: 1px solid #60605F;
+    padding: 20px;
+}
+
+p.timeline_postagem_conteudo {
+    min-height: 150px;
+    margin: 10px;
+    color: #2B2B2B;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 14pt;
+}
+
+a.timeline_postagem_conteudo {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10pt;
+    margin: 10px;
+    float: right;
+    font-style: italic;
+}
+
+div.timeline_postagem_comentario_usuario a {
+    font-size: 12px;
+}
+

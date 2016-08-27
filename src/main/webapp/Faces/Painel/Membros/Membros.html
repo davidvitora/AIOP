@@ -1,10 +1,27 @@
+<div id="adicionar-membro" class="ui-dialog" style="display: none">
+    <label > Digite o nome do membro a adicionado </label>
+    <input type="text" ng-model="_member_search_text" class="formulario-login form-control" placeholder="Nome do Usuario" >
+    <button ng-click="btn_procurar_membro()" class="btn btn-default">Procurar</button>
+    <select id="member_add_selection">
+        <option ng-repeat="member_item in _member_search_result" value="{{ member_item.id }}" > {{ member_item.name }} </option>
+    </select>
+    <label>Selecione o nivel de permissão para o membro</label>
+    <select id="member_add_permission">
+        <option  value="2" > Auxiliar </option>
+        <option  value="3" > Coordenador </option>
+        <option  value="4" > Membro </option>
+    </select>
+    {{ selected_user_add_member }}
+    <button ng-click="btn_add_member_action()">Adicionar membro</button>
+</div>
 <div style="color: white; text-align: left">
 <h1>MEMBROS</h1>
 <h2>Lider</h2>
 <div class="row" >
     <ul class="colegas" ng-repeat="membro in membros">
-            <li ng-if="membro.permition == 1"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
+            <li ng-if="membro.permission == 1"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
             <p>{{ membro.name }}</p>
+            <button ng-if="">Excluir membro</button>
             </li>
     </ul>
 </div>
@@ -12,7 +29,7 @@
     <h2 style="color: white">Auxiliares</h2>
     <div class="row" style="color: white;">
         <ul class="colegas" ng-repeat="membro in membros">
-            <li ng-if="membro.permition == 2"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
+            <li ng-if="membro.permission == 2"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
                 <p>{{ membro.name }}</p>
             </li>
         </ul>
@@ -20,7 +37,7 @@
     <h2>Membro</h2>
     <div class="row" style="color: white;">
         <ul class="colegas" ng-repeat="membro in membros">
-            <li ng-if="membro.permition == 4"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
+            <li ng-if="membro.permission == 4"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
                 <p>{{ membro.name }}</p>
             </li>
         </ul>
@@ -28,10 +45,10 @@
     <h2>Orientadores</h2>
     <div>
         <ul class="row professores" ng-repeat="membro in membros">
-            <li ng-if="membro.permition == 3"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
+            <li ng-if="membro.permission == 3"><img src="/resources/images/icones/iconeOrientador.png" class="img-circle img-responsive" style="width: 150px; height: 150px;" />
                 <p>{{ membro.name }}</p>
             </li>
         </ul>
     </div>
 </div>
-<button class="btn btn-default">Adicionar</button>
+<button class="btn btn-default" ng-click="btn_add_membro()">Adicionar</button>

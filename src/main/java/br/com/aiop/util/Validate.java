@@ -5,10 +5,14 @@
  */
 package br.com.aiop.util;
 
+import br.com.aiop.persistencia.entidades.Member;
 import br.com.aiop.persistencia.entidades.Project;
 import br.com.aiop.persistencia.entidades.User;
+import br.com.aiop.persistencia.jdbc.MemberDAO;
 import br.com.aiop.persistencia.jdbc.ProjectDAO;
 import br.com.aiop.persistencia.jdbc.UserDAO;
+import br.com.aiop.session.AIOPSession;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -109,4 +113,35 @@ public class Validate {
         return null;
     }
     
+    public static Courier validateMember(Member member, MemberDAO dao, AIOPSession session) throws SQLException{
+        Courier courier = new Courier();
+        if(dao.isMember(member)){
+            courier.setCode(400);
+            courier.insertMessages("O Usuário já é membro do projeto");
+        }
+        if(member.getPermission() == 1){
+            courier.setCode(400);
+            courier.insertMessages("Não é possivel definir mais de um dono para o projeto");
+        }
+        if(member.getPermission() <= 1 || member.getPermission() > 3){
+            courier.setCode(400);
+            courier.insertMessages("Nivel de permissão não valido");
+        }
+        if(dao.isProjectValid(member.getIdProject()) == false){
+            courier.setCode(400);
+            courier.insertMessages("Projeto não é valido");
+        }
+        if(dao.isUserValid(member.getId()) == false){
+            courier.setCode(400);
+            courier.insertMessages("Usuário não é valido");
+        }
+        if(session.getProjectPermission() < 1 && session.getProjectPermission() > 2){
+            courier.setCode(400);
+            courier.insertMessages("Você não tem permissão para adicionar membros ao projeto");
+        }
+        if(courier.getMessages().isEmpty() == false){
+            return courier;
+        }
+        return null;
+    }
 }

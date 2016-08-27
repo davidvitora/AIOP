@@ -5,34 +5,34 @@ myApp.config(['$routeProvider',
         $routeProvider
 
         .when("/",{
-            templateUrl: '/aiop/Faces/Painel/Timeline/Timeline.html',
+            templateUrl: '/Faces/Painel/Timeline/Timeline.html',
             controller: 'mainController'
 
         })
         .when("/membros",{
-            templateUrl: '/aiop/Faces/Painel/Membros/Membros.html',
+            templateUrl: '/Faces/Painel/Membros/Membros.html',
             controller: 'mainController'
         })
         .when("/definitions",{
-            templateUrl: '/aiop/Faces/Painel/default/default.html',
+            templateUrl: '/Faces/Painel/default/default.html',
             controller: 'mainController'
         })
         
         .when("/assignments",{
-            templateUrl: '/aiop/Faces/Painel/default/default.html',
+            templateUrl: '/Faces/Painel/default/default.html',
             controller: 'mainController'
         })
         
-        .when("/archives",{
-            templateUrl: '/aiop/Faces/Painel/default/default.html',
+        .when("/arquivos",{
+            templateUrl: '/Faces/Painel/Arquivos/Arquivos.html',
             controller: 'mainController'
         })
         .when("/personalization",{
-            templateUrl: '/aiop/Faces/Painel/default/default.html',
+            templateUrl: '/Faces/Painel/default/default.html',
             controller: 'mainController'
         })
         .when("/planejamento",{
-            templateUrl: '/aiop/Faces/Painel/Planejamento/Planejamento.html',
+            templateUrl: '/Faces/Painel/Planejamento/Planejamento.html',
             controller: 'mainController'
         })
         .otherwise({
@@ -47,114 +47,122 @@ myApp.filter('trusted', function($sce) {
 });
 
 myApp.controller('mainController', ["$scope", "$timeout", "$http", function($scope, $timeout, $http){
-    //AUX
-        $scope.courierModal;
-    //
         
     $scope.projeto ;
-    $scope.membros ;
-    $scope.planejamento ;
-    $scope.timeline;
     
     //Pre inicialização, obtidos os dados do projeto;
     $http.get('/app/projetos/acessar').success( function(data){
        $scope.projeto = data;
     }).error( function(data){
-        $scope.courierModal = data;
+        $scope.courier400Modal = data;
     });
     
-    //Pega dados dos membros
-    $http.get('/getMembros').success( function(data){
-       $scope.membros = data;
-    }).error( function(data){
-        console.log(data);
-    });
-    $http.get('/getPlanejamento').success( function(data){
-       $scope.planejamento = data;
-    }).error( function(data){
-        console.log(data);
-    });
-    $http.get('/getTimeline').success( function(data){
-       $scope.timeline= data;
-    }).error( function(data){
-        console.log(data);
-    });
-    $scope.acessarConfiguracoes = function(data){
-     $http.get('/Faces/Welcome.jsp').success( function(data){
-         window.location.href = "/Faces/Welcome.jsp";
-     }).error( function(data){
-         console.log(data);
-     });
-   };
-   
-   //Comandos da tela de planejamento adicionar
-   $scope.titleNewEvent;
-   $scope.descriptionNewEvent;
-   $scope.dateNewEvent;
-   $scope.statsNewEvent;
-   $scope.novoEventoOpen = function(){
-     $("#novoEvento").show();
-   };
-   $scope.novoEventoClose = function(){
-     $("#novoEvento").hide();
-   };
-   $scope.novoEventoCadastrar = function(){
-        $http.post("/setPlanejamento", { title : $scope.titleNewEvent , 
-            description : $scope.descriptionNewEvent , 
-            date : $scope.dateNewEvent, 
-            stats :  $scope.statsNewEvent})
-        .success(function(result){
-            $http.get('/getPlanejamento')
-                    .success( function(data){
-                $scope.planejamento = data;
-            }).error( function(data){
-                console.log(data);
-            });
-            $("#novoEvento").hide();
-            $http.get('/getTimeline').success( function(data){
-                $scope.timeline= data;
-            }).error( function(data){
-                console.log(data);
-            });
-        }).error(function(data, stats){
-            console.log(stats);
-        });
+    //Referente ao menu para telas pequenas
+    $scope.menu_view = false;
+    $scope.menu_view_action = function(){
+        if($scope.menu_view === false){
+            $scope.menu_view = true;
+            $(".menu-coluna1").show();
+        }else if($scope.menu_view === true){
+            $scope.menu_view = false;
+            $(".menu-coluna1").hide();
+        }
     };
-    //
-    $scope.item;
-    $scope.modifyDataEventoOpen = function(evento){
-        $scope.item = evento;
-     $("#mudarData").show();
-    };
-    $scope.modifyDataEventoClose = function(){
-      $("#mudarData").hide();
-    };
-    $scope.modifyDataEventoAtualizar = function(){
-        $http.post("/setEventoNovaData", { oldObject : $scope.item , 
-            newDate : $scope.dateNewEvent})
-        .success(function(result){
-            $http.get('/aiop/getPlanejamento')
-                    .success( function(data){
-                $scope.planejamento = data;
-            }).error( function(data){
-                console.log(data);
-            });
-            $("#novoEvento").hide();
-            $http.get('/getTimeline').success( function(data){
-                $scope.timeline= data;
-            }).error( function(data){
-                console.log(data);
-            });
-            $scope.modifyDataEventoClose = function(){
-                $("#mudarData").hide();
-            };
-        }).error(function(data, stats){
-            console.log(stats);
+    
+    //Botão para sair
+    $scope.logOff = function(){
+        $http.post('/app/session/logOff')
+        .success(function(data){
+            $scope.response = data;
+            window.location.href = "/index.jsp";
+        })
+        .error(function(data){
+
         });
     };
     
+    //Botão para a tela HOME
+    $scope.view_home = function(){
+        window.location.href = "/Faces/Welcome.jsp";
+    };
     
-   
+    //-----------------------TELA DE MEMBROS------------------------------//
+    
+    $scope.membros;
+    $scope.updateMembros = function(){
+        $http.get('/app/membro').success( function(data){
+           $scope.membros = data;
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    $scope.updateMembros();
+    
+    //Procura de membro
+    $scope._member_search_text;
+    $scope._member_search_result;
+    $scope.selected_user_add_member;
+    $scope.selected_user_permission;
+    $scope.btn_procurar_membro = function(){
+        $http.get('/app/membro/' + $scope._member_search_text).success( function(data){
+            $scope._member_search_result = data;
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    
+    $scope.btn_add_membro = function(){
+        $( "#adicionar-membro" ).dialog({
+            title: "Adicionar membro",
+            modal: true,
+            autoOpen: true,
+            closeOnEscape: true,
+            show: { effect: "fade", duration: 200},
+            hide: { effect: "fade", duration: 200}
+        });
+        $( "#adicionar-membro" ).dialog("open");
+    };
+    
+    $scope.btn_add_member_action = function(){
+        $scope.selected_user_add_member = $("#member_add_selection").val();
+        $scope.selected_user_permission = $("#member_add_permission").val();
+        $http.post("/app/membro/add",
+        {id: $scope.selected_user_add_member, permission: $scope.selected_user_permission})
+        .success(function(data){
+            $( "#adicionar-membro" ).dialog("close");
+            $scope.updateMembros();
+        })
+        .error(function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    
+    //-----------------------Tela de arquivo----------------------------//
+    $scope.arquivos;
+    $scope.updateArquivos = function(){
+        $http.get('/app/files').success( function(data){
+           $scope.arquivos = data;
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    $scope.upload = function(){
+        $http.post('/app/files').success( function(data){
+           $scope.arquivos = data;
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    $scope.updateArquivos();
+    
+    $scope.downloadArquivo = function(chave){
+         window.open("/app/files/"+chave);
+    };
+    
+    $scope.uploadArquivo = function(){
+         window.open("/Faces/Painel/Arquivos/Upload.html", "", "width=400,height=100");
+    };
+    
 }]);
 
 
