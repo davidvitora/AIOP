@@ -14,7 +14,6 @@ import br.com.aiop.persistencia.jdbc.UserDAO;
 import br.com.aiop.session.AIOPSession;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -48,10 +47,10 @@ public class Validate {
         //Validar nome
         if( user.getName().length() < 2 ){
             courier.insertMessages("O nome deverá ter no minimo 2 caracteres");
-        } else if(user.getName().length() > 16){
+        } else if(user.getName().length() > 30){
             courier.insertMessages("O nome deverá ter no maximo 30 caracteres");
-        }else if(user.getName().matches("^[a-zA-Z]+$") == false){
-            courier.insertMessages("O nome não deverá ter caracteres especiais ou numeros");
+        }else if(user.getName().replaceAll(" ", "").matches("^[a-zA-Z]+$") == false){
+            courier.insertMessages("O nome não deverá ter caracteres especiais ou numeross");
         }
         //Validar email
         if(user.getEmail().matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])") == false){
@@ -70,7 +69,7 @@ public class Validate {
         }
         
         //Validar contato
-        if(user.getContact().matches("^[0-9]+$") == false){
+        if(user.getContact().replaceAll(" ", "").matches("^[0-9]+$") == false){
             courier.insertMessages("O contato deverá ter apenas números");
         }else if(user.getContact().length() < 8 ){
             courier.insertMessages("O número deverá ter pelo menos 8 digitos");
@@ -92,12 +91,12 @@ public class Validate {
         //Validando o nome
         if(dao.isAvaliable(project.getName()) == false){
             courier.insertMessages("O nome do projeto já está sendo utilizado");
-        }else if( project.getName().length() < 5 ){
+        }else if( project.getName().replaceAll(" ", "").length() < 5 ){
             courier.insertMessages("O nome do projeto deverá ter no minimo 6 caracteres");
         }
         else if(project.getName().length() > 16){
-            courier.insertMessages("O nome do projeto deverá ter no maximo 10 caracteres");
-        }else if(project.getName().matches("^[a-zA-Z0-9]+$") == false){
+            courier.insertMessages("O nome do projeto deverá ter no maximo 16 caracteres");
+        }else if(project.getName().replaceAll(" ", "").matches("^[a-zA-Z0-9]+$") == false){
             courier.insertMessages("O nome do projeto não deverá ter caracteres especiais");
         }
         

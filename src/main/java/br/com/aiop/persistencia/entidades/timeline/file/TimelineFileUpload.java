@@ -11,7 +11,7 @@ import br.com.aiop.persistencia.entidades.timeline.GenericTimeline;
  *
  * @author David .V
  */
-public class FileUploadTimeline extends GenericTimeline{
+public class TimelineFileUpload extends GenericTimeline{
     private String fileName;
 
     public String getFileName() {

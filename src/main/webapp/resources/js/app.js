@@ -163,6 +163,63 @@ myApp.controller('mainController', ["$scope", "$timeout", "$http", function($sco
          window.open("/Faces/Painel/Arquivos/Upload.html", "", "width=400,height=100");
     };
     
+    /*----------Timeline-----------------------------------------------------*/
+    $scope.project_timeline;
+    $scope.get_timeline = function(){
+        $http.get('/app/timeline').success( function(data){
+           $scope.project_timeline = data;
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    $scope.get_timeline();
+    
+    $scope.var = function(e){
+        $scope.element_name = $.jQuery.grep(membros, function(e) { 
+            return ( e.id === $scope.timeline.usuario );
+        });
+        return element_name;
+    };
+    
+    $scope.comments;
+    $scope.get_comments = function(timeline){
+        timeline.limit += 1;
+        $http.get('/app/comentario/' + timeline.uuid + "/limit/" + timeline.limit).success( function(data){
+           timeline.comentarios = data;
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+    };
+    
+    /*-->Bloco da postagem*/
+    $scope.postcontent;
+    $scope.post_action = function(){
+        $("#post_btn").hide();
+        $("#Loading").show();
+        $http.post('/app/timeline/post' , {content: $scope.postcontent}).success( function(data){
+            $scope.postcontent = "";
+            $scope.get_timeline();
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+        $("#Loading").hide();
+        $("#post_btn").show();
+    };
+    
+    $scope.postcomment;
+    $scope.postcomment_action = function(commentUUID){
+        $("#postcomment_btn").hide();
+        $("#Loading").show();
+        $http.post('/app/comentario/{commentUUID}' , {content: $scope.postcomment + "uuid", uuid: commentUUID}).success( function(data){
+            $scope.postcomment = "";
+            $scope.get_timeline();
+        }).error( function(data){
+            $scope.courier400Modal = data;
+        });
+        $("#Loading").hide();
+        $("#postcomment_btn").show();
+    };
+    
 }]);
 
 

@@ -28,19 +28,15 @@ public void jspInit() {
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/resources/css/style.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-        
-    <script src="/resources/js/angular.js"></script>
-    <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
-    <script src="https://code.angularjs.org/1.5.5/angular-sanitize.js"></script>
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/jquery-ui.css">
-    <script src="/resources/js/jquery-ui.js"></script>
-    <script src="/resources/js/app.js"></script>
-    
-
+        <script src="/resources/js/angular.js"></script>
+        <script src="/resources/js/angular-route.js"></script>
+        <script src="/resources/js/jquery-3.0.0.min.js"></script>
+        <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+        <script src="/resources/js/jquery-ui.js"></script>
+        <script src="/resources/js/app.js"></script>
 </head>
 <body ng-controller="mainController">
+<img id="Loading" style="display: none;"  alt="Loading" src="/resources/gif/load.gif" />
 <div class="top">
 	<div class="top-menu-iten">João da silva</div>
 	<img id="menu" class="icon-top-menu"  ng-click="menu_view_action()"  src="/resources/icons/icon.svg"/>

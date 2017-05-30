@@ -9,7 +9,8 @@ public class GenericTimeline {
     private int idUser;
     private int idProject;
     private Date date;
-    private List<Comment> comments;
+    private String uuid;
+    private int CommentCont;
 
     public int getId() {
         return id;
@@ -51,11 +52,19 @@ public class GenericTimeline {
         this.date = date;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public int getCommentCont() {
+        return CommentCont;
+    }
+
+    public void setCommentCont(int CommentCont) {
+        this.CommentCont = CommentCont;
     }
 }

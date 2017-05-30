@@ -7,7 +7,7 @@ package br.com.aiop.util;
 
 import br.com.aiop.persistencia.entidades.timeline.GenericTimeline;
 import br.com.aiop.persistencia.entidades.timeline.TimelinePost;
-import br.com.aiop.persistencia.entidades.timeline.file.FileUploadTimeline;
+import br.com.aiop.persistencia.entidades.timeline.file.TimelineFileUpload;
 import java.util.Iterator;
 import java.util.List;
 import org.json.JSONObject;
@@ -17,7 +17,7 @@ import org.json.JSONArray;
 public class JsonMaker {
     
     /*Transforma uma lista de objetos de timeline genericos em JSON*/
-    public static JSONArray Timeline(List<GenericTimeline> timeline){
+    public static JSONObject Timeline(List<GenericTimeline> timeline){
         JSONObject obj;
         JSONArray array;
         array = new JSONArray();
@@ -25,28 +25,32 @@ public class JsonMaker {
         /*Timeline tipes */
         GenericTimeline GenericTL;
         TimelinePost PostTL;
-        FileUploadTimeline fileUploadTL;
+        TimelineFileUpload fileUploadTL;
         /*----------------*/
         
-        Iterator it = timeline.iterator();
+        Iterator<GenericTimeline> it = timeline.iterator();
         while(it.hasNext()){
             obj = new JSONObject();
-            GenericTL = (GenericTimeline) it.next();
+            GenericTL = it.next();
             obj.put("id", GenericTL.getId());
             obj.put("tipo", GenericTL.getType());
             obj.put("data", GenericTL.getDate());
             obj.put("usuario", GenericTL.getIdUser());
+            obj.put("uuid", "000000000000000000000000000000000000");
+            obj.put("limit", 0 );
             if(GenericTL.getType() == 1){
                 PostTL = (TimelinePost)GenericTL;
-                obj.put("Conteudo", PostTL.getContent());
+                obj.put("conteudo", PostTL.getContent());
             }
             else if(GenericTL.getType() == 2){
-                fileUploadTL = (FileUploadTimeline) GenericTL;
+                fileUploadTL = (TimelineFileUpload) GenericTL;
                 obj.put("nome_do_arquivo", fileUploadTL.getFileName());
             }
             array.put(obj);
         }
-        return array;
+        obj = new JSONObject();
+        obj.put("Lista", array);
+        return obj;
     }
     
 }

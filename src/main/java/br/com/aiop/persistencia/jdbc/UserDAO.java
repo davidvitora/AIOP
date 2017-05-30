@@ -1,38 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.aiop.persistencia.jdbc;
 
 import br.com.aiop.persistencia.entidades.User;
-import br.com.aiop.util.DateRest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.ws.rs.core.GenericEntity;
 
 /**
  *
  * @author David .V
  */
 public class UserDAO {
-    private Connection con;
+    private final Connection con;
     
 
     public UserDAO() throws ClassNotFoundException{
         this.con = ConexaoFactory.getConnection();
     }
     
+    
+   /** Tenta realizar o login do usuário na sessão utilizando credenciais 
+     * enviadas
+     * @param login String do login do usuário
+     * @param password String do password do usuário
+     * @return Retorna o objeto do usuário em caso de login de sucesso ou null
+     * em caso de falha
+     * @throws java.sql.SQLException
+     * @throws java.text.ParseException*/
     public User tryLogin(String login, String password) throws SQLException, ParseException{
         User user = new User();
-        Date date = new Date();
+        Date date;
         String sql = "select * from aiop.user where login = ? and password = ?;";
         try{
             PreparedStatement prep = con.prepareStatement(sql);
@@ -52,13 +52,14 @@ public class UserDAO {
                 return user;
             }
             }catch(SQLException e){
-                e.printStackTrace();
         }
         
         return null;
     }
     
-    //Verifica se um login está disponivel para uso;
+    /** Verifica se um login está disponivel para uso
+     * @param login String do login a ser verificado
+     * @return Retorna true caso esteja disponivel e falso caso não*/
     public boolean isAvaliable(String login){
         String sql = "SELECT * FROM aiop.user where login = ? ";
         try{
@@ -69,11 +70,13 @@ public class UserDAO {
                 return false;
             }
         }catch(SQLException e){
-            e.printStackTrace();
         }
         return true;
     }
     
+    /** Recebe  Objeto do usuário cadastrado e salva no banco de dados
+     * @param user Objeto do usuário a ser salvo no banco de dados
+     * @return retorna true em caso de saldo com sucesso e false em caso de falha*/
     public boolean save(User user){
         String sql = "INSERT INTO `aiop`.`user`"+
         "(`name`, `login`, `password`, `email`, `birthDay`, `contact`, `created`)" +
@@ -92,7 +95,6 @@ public class UserDAO {
             return true;
             
         }catch(SQLException e){
-            e.printStackTrace();
         }
         return false;
         

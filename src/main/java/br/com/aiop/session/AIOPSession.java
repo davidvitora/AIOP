@@ -5,16 +5,9 @@ import br.com.aiop.persistencia.entidades.User;
 import br.com.aiop.persistencia.jdbc.ProjectDAO;
 import br.com.aiop.persistencia.jdbc.UserDAO;
 import br.com.aiop.util.Courier;
-import br.com.aiop.util.DateRest;
 import java.sql.SQLException;
 import java.text.ParseException;
-import javax.ejb.EJB;
-import javax.ejb.Remove;
-import javax.ejb.Singleton;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
-import javax.ws.rs.core.GenericEntity;
 
 @Stateless
 public class AIOPSession {
@@ -27,7 +20,8 @@ public class AIOPSession {
         
     }
     
-    //Verifica se há uma instancia de User pra verificar se o usuário está logado
+    /** Verifica se há uma instancia de User pra verificar se o usuário está logado
+     * @return retorna true caso logado e false caso não logado  */
     public boolean isLoged(){
         return getUser() != null;
     }
@@ -37,7 +31,13 @@ public class AIOPSession {
         return user;
     }
     
-    //Realiza o login e retorna verdadeiro caso bem sucedido
+    /** Realiza login do usuário conforme as credenciais enviadas
+     * @param login
+     * @param password
+     * @return Retorna true em caso de sucesso e false em caso de falha ao logar
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
+     * @throws java.text.ParseException*/
     public boolean Login(String login, String password) throws ClassNotFoundException, SQLException, ParseException{
         UserDAO dao = new UserDAO();
         user = dao.tryLogin(login, password);
@@ -67,7 +67,12 @@ public class AIOPSession {
     }
     
     
-    //Tenta setar o projeto que está sendo acessado e retorna um mensageiro
+    /** Tenta acesso ao projeto conforme o usuário logado na sessão atualmente
+     * @param idProject inteiro que representa o id do projeto
+     * @return Retorna o objeto de reposta a pagina
+     * em caso de falha
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException*/
     public Courier acessProject(int idProject) throws ClassNotFoundException, SQLException {
         Courier courier = new Courier(); // Classe mensageira
         ProjectDAO dao = new ProjectDAO(); // Classe de acesso a dados
@@ -89,7 +94,7 @@ public class AIOPSession {
         return courier;
     }
     
-    //Finaliza a sessão
+    /** Finaliza os objetos de usuário e projeto acessado da sessão*/
     public void logOff(){
         user = null;
         project = null;

@@ -1,8 +1,12 @@
-<div id="publicacoes" ng-repeat="timeline in project_timeline">
+<div class="post_box">
+    <input type="text" class="post_box" ng-model="postcontent" />
+    <button id="post_btn" class="post_box" ng-click="post_action()">Postar</button>
+</div>
+<div id="publicacoes" ng-repeat="timeline in project_timeline.Lista">
     <div class="timeline_postagem" ng-if="timeline.tipo === 1">
         <div class="timeline_postagem_usuario">
             <img src="/resources/images/perfil.jpg" class="img-reponsiva img-circular img-center"/>
-            <a class="timeline_postagem_usuario"> {{ timeline.usuario }}</a>
+            <a class="timeline_postagem_usuario"> {{  }}</a>
         </div>
         <div class="timeline_postagem_conteudo">
             <p class="timeline_postagem_conteudo"> {{ timeline.conteudo }}</p>
@@ -10,17 +14,29 @@
         </div>
         <div class="timeline_postagem_comentarios">
             <div class="timeline_postagem_comentarios_contagem">
-                <a class="timeline_postagem_comentarios_contagem"> {{ timeline.comentarios.cont }} Comentários </a>
+                <a class="timeline_postagem_comentarios_contagem"> {{ timeline.commentCont }} Comentários </a>
             </div>
-            <div ng-repeat="comentario in timeline.comentarios.comentario" class="timeline_postagem_comentario">
+            <div ng-repeat="comentario in timeline.comentarios" class="timeline_postagem_comentario">
                 <div class="timeline_postagem_comentario_usuario">
                     <img src="/resources/images/perfil.jpg" class="img-reponsiva img-circular img-align"/>
-                    <a>{{ comentario.usuario }}</a>
+                    <a>{{ comentario.idUser }}</a>
                 </div>
                 <div class="timeline_postagem_comentario_conteudo">
-                    <p class="timeline_postagem_comentario_conteudo">{{ comentario.conteudo }}</p>
-                    <a class="timeline_postagem_comentario_conteudo">Postado Em: {{ comentario.data }}</a>
+                    <p class="timeline_postagem_comentario_conteudo">{{ comentario.content }}</p>
+                    <a class="timeline_postagem_comentario_conteudo">Postado Em: {{ comentario.date }}</a>
                 </div>
+            </div>
+            <div ng-if=" timeline.commentCont > 0 ">
+                <div class="timeline_postagem_comentario" ng-if="timeline.comentarios === null">
+                    <a class="timeline_postagem_comentario_conteudo"  ng-click="get_comments(timeline)">Mostrar Comentários</a>
+                </div>
+                <div class="timeline_postagem_comentario" ng-if="timeline.comentarios !== null">
+                    <a class="timeline_postagem_comentario_conteudo"  ng-click="get_comments(timeline)">Mostrar mais</a>
+                </div>
+            </div>
+            <div class="timeline_postagem_comentario_comentar">
+                <input type="text" class="timeline_postagem_comentario_comentar" ng-model="postcomment" />
+                <button id="postcomment_btn" class="timeline_postagem_comentario_comentar" ng-click="postcomment_action(timeline.uuid)">Commentar</button>
             </div>
         </div>
     </div>

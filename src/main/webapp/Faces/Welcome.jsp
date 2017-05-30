@@ -28,11 +28,11 @@ public void jspInit() {
         <meta charset="utf-8">
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
         <link id="Style" href="/resources/css/firstStyle.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+        <script src="/resources/js/jquery-3.0.0.min.js"></script>
         <link rel="stylesheet" href="/resources/css/jquery-ui.css">
         <script src="/resources/js/jquery-ui.js"></script>
         <script src="/resources/js/angular.js"></script>
-        <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+        <script src="/resources/js/angular-route.js"></script>
         <script src="/resources/js/preapp.js"></script>
     </head>
     <body>

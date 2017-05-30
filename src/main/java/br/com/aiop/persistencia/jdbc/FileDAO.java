@@ -5,9 +5,7 @@
  */
 package br.com.aiop.persistencia.jdbc;
 
-import br.com.aiop.persistencia.entidades.Member;
 import br.com.aiop.persistencia.entidades.ProjectFile;
-import br.com.aiop.persistencia.entidades.User;
 import br.com.aiop.session.AIOPSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +20,7 @@ import java.util.List;
  * @author David .V
  */
 public class FileDAO { 
-    Connection con;
+    private static Connection con;
     
     
     public FileDAO() throws ClassNotFoundException{
@@ -33,8 +31,9 @@ public class FileDAO {
     public List<ProjectFile> getFiles(AIOPSession session){
         List<ProjectFile> files = new ArrayList();
         ProjectFile file;
-        String sql = "select * from aiop.file where idProject = ? ;";
+        String sql;
         try{
+            sql = "select * from aiop.file where idProject = ? ;";
             PreparedStatement prep = con.prepareStatement(sql);
             prep.setInt(1, session.getProject().getId());
             ResultSet resultado = prep.executeQuery();

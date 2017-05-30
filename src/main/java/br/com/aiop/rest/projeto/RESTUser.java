@@ -20,6 +20,13 @@ public class RESTUser {
     @EJB
     private AIOPSession aiopSession;
     
+    /**
+     *
+     * @param user Objeto do usuário que será convertido do JSON enviado a
+     * solicitação POST
+     * @return retorna Courier de resposta em formato JSON
+     * @throws ClassNotFoundException
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,7 +36,7 @@ public class RESTUser {
         courier = Validate.validateUser(user, dao);
         if(courier == null){
             courier = new Courier();
-            if(dao.save(user)  == false){
+            if(dao.save(user)){
                 courier.setCode(200);
                 courier.setMessage("All rigth");
             return Response.status(200).entity(courier).build();
@@ -42,6 +49,10 @@ public class RESTUser {
         return Response.status(404).entity(courier).build();
     }
     
+    /**
+     *
+     * @return Retorna JSON com o usuário que foi procurado
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(){

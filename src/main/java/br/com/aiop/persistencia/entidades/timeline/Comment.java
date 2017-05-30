@@ -12,11 +12,13 @@ import java.util.Date;
  * @author David .V
  */
 public class Comment {
+    private int id;
     private int idUser;
-    private int idTimeline;
     private int idProject;
     private String content;
     private Date date;
+    private String uuid;
+    
     
     public Comment(){
         
@@ -28,14 +30,6 @@ public class Comment {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
-    }
-
-    public int getIdTimeline() {
-        return idTimeline;
-    }
-
-    public void setIdTimeline(int idTimeline) {
-        this.idTimeline = idTimeline;
     }
 
     public int getIdProject() {
@@ -60,5 +54,21 @@ public class Comment {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

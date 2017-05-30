@@ -8,10 +8,16 @@ package br.com.aiop.persistencia.jdbc;
 import br.com.aiop.persistencia.entidades.Project;
 import br.com.aiop.persistencia.entidades.timeline.GenericTimeline;
 import br.com.aiop.persistencia.entidades.timeline.TimelinePost;
-import br.com.aiop.persistencia.entidades.timeline.file.FileUploadTimeline;
+import br.com.aiop.persistencia.entidades.timeline.file.TimelineFileUpload;
+import br.com.aiop.session.AIOPSession;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -24,20 +30,74 @@ public class TimelineDAO {
         this.con = ConexaoFactory.getConnection();
     }
     
-    public List<GenericTimeline> getTimeline(Project project){
-        GenericTimeline timeline;
-        List<GenericTimeline> timelineList = new ArrayList();
-        TimelinePost timelinepost = new TimelinePost();
-        timelinepost.setId(1);
-        timelinepost.setType(1);
-        timelinepost.setContent("Conteudo");
-        timelineList.add(timelinepost);
-        FileUploadTimeline fuTimeline = new FileUploadTimeline();
-        fuTimeline.setId(2);
-        fuTimeline.setType(2);
-        fuTimeline.setFileName("Anderson.jsp");
-        timelineList.add(fuTimeline);
-        return timelineList;
+    /* Consulta o banco e monta o JSON da timeline*/
+    public JSONObject getTimeline(Project project){
+        JSONObject obj;
+        JSONArray array;
+        array = new JSONArray();
+        String sql = "SELECT * FROM aiop.timelinepost where idProject = ?";
+        try{
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setInt(1, project.getId());
+            ResultSet result = pre.executeQuery();
+            while(result.next()){
+                obj = new JSONObject();
+                obj.put("id", result.getInt("id"));
+                obj.put("tipo", result.getInt("type"));
+                obj.put("data", result.getDate("eventDate"));
+                obj.put("usuario", result.getInt("idUser"));
+                obj.put("uuid", result.getString("uuid"));
+                obj.put("commentCont", result.getString("commentCont"));
+                obj.put("limit", 0 );
+                if(result.getInt("type") == 1){
+                    obj.put("conteudo", result.getString("content"));
+                }
+                else if(result.getInt("type") == 2){
+                    obj.put("nome_do_arquivo", result.getString("fileName"));
+                }
+                array.put(obj);
+            }
+        }catch(SQLException e){
+            
+        }
+        obj = new JSONObject();
+        obj.put("Lista", array);
+        return obj;
     }
-  
+    
+    public boolean saveTimelinePost(AIOPSession session, TimelinePost post){
+        String sql = "Insert into timelinepost (type,idUser,idProject,eventDate,content,uuid) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setInt(1, post.getType());
+            pre.setInt(2, session.getUser().getId());
+            pre.setInt(3, session.getProject().getId());
+            pre.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+            pre.setString(5, post.getContent());
+            pre.setString(6, post.getUuid());
+            pre.execute();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean saveTimelineFileUpload(AIOPSession session, TimelineFileUpload post){
+        String sql = "Insert into timelinefileupload (type,idUser,idProject,eventDate,fileName,uuid) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setInt(1, post.getType());
+            pre.setInt(2, session.getUser().getId());
+            pre.setInt(3, session.getProject().getId());
+            pre.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+            pre.setString(4, post.getFileName());
+            pre.setString(6, post.getUuid());
+            pre.execute();
+            return true;
+        }catch(SQLException e){
+            
+        }
+        return false;
+    }
 }

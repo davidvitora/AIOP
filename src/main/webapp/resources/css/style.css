@@ -18,6 +18,13 @@ body,html{
 	background-color: #2B2B2B;
 }
 
+#Loading{
+    position: absolute;
+    margin-left: 0px;
+    margin-right: 0px;
+    top: 5px;
+}
+
 .icon-top-menu{
     height: 30px;
     width: 30px;
@@ -344,6 +351,10 @@ a.timeline_postagem_comentario_conteudo {
     float: right;
     font-size: 10pt;
     margin: 10px;
+}
+
+a.timeline_postagem_comentario_conteudo:hover{
+    cursor: pointer;
 }
 
 div.timeline_postagem_comentario_usuario {
